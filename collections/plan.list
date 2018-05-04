@@ -1,0 +1,249 @@
+<style>
+  #page {
+    min-height: 600px;
+  }
+</style>
+
+<ul id="mytab" class="nav nav-tabs">
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Off-Season</a>
+    <div class="dropdown-menu" id="offseasonMenu"></div>
+  </li>
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" href="#">Pre-Season</a>
+    <div class="dropdown-menu" id="preseasonMenu"></div>
+  </li>
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">In-Season</a>
+    <div class="dropdown-menu" id="inseasonMenu"></div>
+  </li>
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle disabled" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Post-Season</a>
+    <div class="dropdown-menu" id="postseasonMenu"></div>
+  </li>
+</ul>
+
+<input id="planId" name="planId" type="hidden" value="{collection.urlId}">
+
+<div id="workoutContainer"></div>
+
+<script type="text/javascript">
+
+  var planId = $("#planId").val();
+  var gender, level, clientFullName;
+
+  function displaySection(){
+
+  }
+
+  function displayWorkout(data, season, weekNumber){
+
+    var workoutBody = "<div>Error: the workout for this week is currently not available.</div>";
+
+    $(data.items).each(function(){
+      var thisSeason  = this.customContent.season.toLowerCase();
+      var thisGender  = this.customContent.gender.toLowerCase();
+      var thisLevel   = this.customContent.level.toLowerCase();
+      if (  
+        thisSeason                    == season      && 
+        this.customContent.weekNumber == weekNumber  && 
+        thisGender                    == gender      && 
+        thisLevel                     == level       && 
+        this.customContent.planId     == planId 
+      ){ 
+        workoutBody = this.body; 
+        return false; 
+      } else if (
+        thisSeason                    == season      && 
+        this.customContent.weekNumber == weekNumber  && 
+        thisGender                    == gender      && 
+        thisLevel                     == level       && 
+        (this.customContent.planId == undefined || this.customContent.planId == "") 
+      ){ 
+        workoutBody = this.body; 
+        return false; 
+      }
+    });
+    $("#workoutContainer").html($(workoutBody).html()); 
+  };
+
+  function createWorkoutLink(json){
+
+    var link = $("<a>");
+
+    link.attr( "href",  "#" );
+    link.attr( "class", "dropdown-item" );
+    link.html( "Week " + json.weekNumber );
+
+    link.data( "season",      json.season.toLowerCase() );
+    link.data( "weekNumber",  json.weekNumber );
+
+    addWorkoutLink( link, json.season );
+    
+  };
+
+  function addWorkoutLink(link,season){
+    
+    var seasonMenu;
+    switch ( season.toLowerCase() ) {
+      case "off":
+        seasonMenu = $("#offseasonMenu");
+        break;
+      case "pre":
+        seasonMenu = $("#preseasonMenu");
+        break;
+      case "in":
+        seasonMenu = $("#inseasonMenu");
+        break;
+      case "post":
+        seasonMenu = $("#postseasonMenu");
+        break;
+      default:
+        console.log("Could not add workout link:");
+        console.log(link);
+    }
+
+    $(seasonMenu).children("a").each(function(){
+      if ( 
+        $(this).data("season") == $(link).data("season") &&
+        $(this).data("weekNumber") == $(link).data("weekNumber")
+      ){
+        $(this).remove();
+      }
+    });
+
+    seasonMenu.append(link);
+
+    $(seasonMenu).children("a").sort(sort_menu).appendTo(seasonMenu);
+    function sort_menu(a, b) {
+      return ($(b).data("weekNumber")) < ($(a).data("weekNumber")) ? 1 : -1;
+    };
+
+  };
+
+  function clearSideNavActiveLink(){
+    $(".sectionLinkContainer").each(function(){
+      $(this).removeClass("active-link");
+    });
+  };
+
+  function clearDropdownActiveLink(){
+    $(".dropdown-item").each(function(){
+      $(this).removeClass("active");
+    });
+  };
+
+  function clearTabActiveLink(){
+    $(".nav-link.dropdown-toggle").each(function(){
+      $(this).removeClass("active");
+    });
+  };
+
+  function addSideNavListeners(){
+
+    $(".sectionLink").each(function(){
+      $(this).click(function(event) {
+        event.preventDefault();
+
+        clearSideNavActiveLink();
+        clearDropdownActiveLink();
+        clearTabActiveLink();
+        var parentContainer = $(this).parent()[0];
+        $(parentContainer).addClass("active-link");
+
+
+        $("#workoutContainer").html("LOADING");
+
+        var sectionLinkSlug = $(this).data("href");
+        var url = "https://katy-harris-tbkz.squarespace.com" + sectionLinkSlug;
+
+        $.ajax({
+          url: url, 
+          data: {format:"json"}, 
+          dataType: "json", 
+          method: "GET"
+        })
+        .done(
+          function(data){
+            $("#workoutContainer").html($(data.mainContent).html())
+          }
+        );
+
+      });
+    });
+  };
+
+  function addDropdownListeners(){
+
+    $("#mytab .nav-item .dropdown-menu .dropdown-item").each(function(){
+
+      $(this).click(function(event) {
+
+        event.preventDefault(); 
+
+        clearSideNavActiveLink();
+        clearDropdownActiveLink();
+        clearTabActiveLink();
+        $(this).addClass("active");
+        $($($(this).parent()[0]).siblings(".nav-link.dropdown-toggle")[0]).addClass("active");
+
+        var seasonClicked = $(this).data("season").toLowerCase();
+        var weekNumberClicked = $(this).data("weekNumber");
+
+        $("#workoutContainer").html("LOADING");
+
+        $.ajax({
+          url: "https://katy-harris-tbkz.squarespace.com/workouts", 
+          data: {format:"json"}, 
+          dataType: "json", 
+          method: "GET"
+        })
+        .done(
+          function(data){
+            displayWorkout(data, seasonClicked, weekNumberClicked);          
+          }
+        );
+      });
+    });
+  };
+
+  $(document).ready(function(){
+
+    addSideNavListeners();
+
+    $.ajax({
+      url: "https://katy-harris-tbkz.squarespace.com/plans", 
+      data: {format:"json"}, 
+      dataType: "json", 
+      method: "GET"
+    })
+    .done(
+      function(data){ 
+        $(data.items).each(function(){
+          if ( this.customContent.planId == planId ){
+            gender =          this.customContent.gender.toLowerCase();
+            level =           this.customContent.level.toLowerCase();
+            clientFullName =  this.customContent.clientFullName;
+          }
+        });
+      }
+    );
+
+    $.ajax({
+      url: "https://katy-harris-tbkz.squarespace.com/workouts", 
+      data: {format:"json"}, 
+      dataType: "json", 
+      method: "GET"
+    })
+    .done(
+      function(data){ 
+        $(data.items).each(function(){
+          createWorkoutLink(this.customContent);
+        });
+        addDropdownListeners(); 
+      }
+    );
+
+  });
+
+</script>

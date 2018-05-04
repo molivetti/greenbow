@@ -216,31 +216,83 @@
         <a href="{collection.fullUrl}"><span>{author.displayName}</span></a>
       </p>
       {.end}
-
       <main id="page" role="main">
         {.section collection}
-        {.collectionTypeNameEquals? products}{.section categories}<div id="categoryNav">
-          <div class="category-nav-toggle"></div>
-          <nav class="category-nav">
-            <ul class="category-nav-links">
-              <li class="nav-section-label">{navigationTitle}</li>
-              <li class="filter"><a>Filter{.if categoryFilter}: {categoryFilter}{.end}</a></li>
-              <li{.if categoryFilter}{.or} class="active-link all"{.end}><a href="{fullUrl}">All</a></li>
-              {.repeated section @}
-              <li{.equal? categoryFilter @} class="active-link"{.end}><a href="{fullUrl}?category={@|url-encode}">{@}</a></li>
-              {.end}
-            </ul>
-          </nav>
-        </div>{.end}{.end}<!--
-        -->{.collectionTypeNameEquals? page}<!--
-        --><squarespace:folder-navigation template="folder-navigation" />{.end}{.end}<!--
-        --><div id="content" class="main-content" data-content-field="main-content" data-collection-id="{collection.id}" {.equal? collection.typeName "gallery"}{.or}{.equal? collection.typeName "index"}{.or}data-edit-main-image="Banner"{.end}{.end}>
-         {squarespace.main-content}
-        </div><!--
-        -->{.section collection}{.collectionTypeNameEquals? blog}<aside id="rightSidebar" role="complementary">
-          <squarespace:block-field class="open-block-field" id="blogBlocks-{id}" columns="12" label="Blog Sidebar Content" />
-        </aside>
+          {.collectionTypeNameEquals? products}
+            {.section categories}
+              <div id="categoryNav">
+                <div class="category-nav-toggle"></div>
+                <nav class="category-nav">
+                  <ul class="category-nav-links">
+                    <li class="nav-section-label">{navigationTitle}</li>
+                    <li class="filter"><a>Filter{.if categoryFilter}: {categoryFilter}{.end}</a></li>
+                    <li{.if categoryFilter}{.or} class="active-link all"{.end}><a href="{fullUrl}">All</a></li>
+                    {.repeated section @}
+                    <li{.equal? categoryFilter @} class="active-link"{.end}><a href="{fullUrl}?category={@|url-encode}">{@}</a></li>
+                    {.end}
+                  </ul>
+                </nav>
+              </div>
+            {.end}
+          {.end}
+          {.collectionTypeNameEquals? page}
+            <squarespace:folder-navigation template="folder-navigation" />
+          {.end}
+
+          {.collectionTypeNameEquals? plan}
+            <style>
+              .hide-page-sidebar #folderNav+#content {
+                display: inline-block;
+              }
+              .hide-page-sidebar #folderNav {
+                display: inline-block;
+              }
+              .hide-page-sidebar #content{
+                width: calc(100% - 255px);
+                display: inline-block;
+                vertical-align: top;
+              }
+              .teamLogo {
+                max-width: 100%;
+                margin-bottom: .5em;
+              }
+              .teamNameNav {
+                font-weight: 400;
+              }
+              #folderNav {
+                float: left;
+                padding-right: ;
+              }
+              #sideNavTest {
+                float: left;
+              }
+            </style>
+            <div id="folderNav" data-content-field="navigation-folderNav">
+              <div class="folder-nav-toggle"></div>
+              <nav class="folder-nav" role="navigation">
+                <img class="teamLogo" src="/s/{urlId}Logo.jpg" />
+                <ul>
+                  <li class="nav-section-label teamNameNav">{collection.title}</li>
+                  {.repeated section collections}
+                  <li class="{typeLabel}-collection sectionLinkContainer"><a class="sectionLink" data-href="{fullUrl}" href="#">{navigationTitle}</a></li>
+                  {.end}
+                </ul>
+              </nav>
+            </div>
+
+          {.end}
+
         {.end}
+
+        <div id="content" class="main-content" data-content-field="main-content" data-collection-id="{collection.id}" {.equal? collection.typeName "gallery"}{.or}{.equal? collection.typeName "index"}{.or}data-edit-main-image="Banner"{.end}{.end}>
+          {squarespace.main-content}
+        </div>
+        {.section collection}
+          {.collectionTypeNameEquals? blog}
+            <aside id="rightSidebar" role="complementary">
+              <squarespace:block-field class="open-block-field" id="blogBlocks-{id}" columns="12" label="Blog Sidebar Content" />
+            </aside>
+          {.end}
         {.end}
       </main>
 
@@ -260,6 +312,9 @@
       </footer>
 
     </div>
+
+    <squarespace:script src="jquery-3.3.1.min.js" />
+    <squarespace:script src="bootstrap.js" />
 
     <squarespace:script src="site-bundle.js" combo="false" />
     {squarespace-footers}
