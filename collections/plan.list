@@ -161,6 +161,7 @@
         })
         .done(
           function(data){
+            console.log(data);
             $("#workoutContainer").html($(data.mainContent).html())
           }
         );
