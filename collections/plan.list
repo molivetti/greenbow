@@ -32,10 +32,6 @@
   var planId = $("#planId").val();
   var gender, level, clientFullName;
 
-  function displaySection(){
-
-  }
-
   function displayWorkout(data, season, weekNumber){
 
     var workoutBody = "<div>Error: the workout for this week is currently not available.</div>";
@@ -155,7 +151,7 @@
         $("#workoutContainer").html("LOADING");
 
         var sectionLinkSlug = $(this).data("href");
-        var url = "https://www.welllifewellness.com/" + sectionLinkSlug;
+        var url = "https://www.welllifewellness.com" + sectionLinkSlug;
 
         $.ajax({
           url: url, 
