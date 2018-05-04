@@ -97,11 +97,9 @@
             },
             hideArrowsWhenOneSlide: function() { e.one(".posts .post:only-child") && e.all(".circles").addClass("hidden") },
             repositionCartButton: function() {
-            	if (e.one("#header")){
-            		var t = e.one("#header").get("offsetHeight"),
-                    	n = e.one(".sqs-cart-dropzone");
-                	n && (e.one(".transparent-header.has-banner-image") ? n.setStyle("top", t) : n.setStyle("top", t + 20))
-            	}
+                var t = e.one("#header").get("offsetHeight"),
+                    n = e.one(".sqs-cart-dropzone");
+                n && (e.one(".transparent-header.has-banner-image") ? n.setStyle("top", t) : n.setStyle("top", t + 20))
             },
             showIndexNavOnScroll: function() {
                 var t, n = function() {
