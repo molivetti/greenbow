@@ -1,1 +1,1 @@
-{@|json-pretty}
+<script>console.log({@|json-pretty})</script>
