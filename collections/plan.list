@@ -18,7 +18,7 @@
     <div class="dropdown-menu" id="inseasonMenu"></div>
   </li>
   <li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle disabled" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Post-Season</a>
+    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Post-Season</a>
     <div class="dropdown-menu" id="postseasonMenu"></div>
   </li>
 </ul>
