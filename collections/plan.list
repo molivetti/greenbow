@@ -32,6 +32,14 @@
   var planId = $("#planId").val();
   var gender, level, clientFullName;
 
+  // Load all images via Squarespace's Responsive ImageLoader
+  function loadAllImages() {
+    var images = document.querySelectorAll('img[data-src]' );
+    for (var i = 0; i < images.length; i++) {
+      ImageLoader.load(images[i], {load: true});
+    }
+  }
+
   function displayWorkout(data, season, weekNumber){
 
     var workoutBody = "<div>Error: the workout for this week is currently not available.</div>";
@@ -61,6 +69,7 @@
       }
     });
     $("#workoutContainer").html($(workoutBody).html()); 
+    loadAllImages();
   };
 
   function createWorkoutLink(json){
@@ -162,7 +171,8 @@
         .done(
           function(data){
             console.log(data);
-            $("#workoutContainer").html($(data.mainContent).html())
+            $("#workoutContainer").html($(data.mainContent).html());
+            loadAllImages();
           }
         );
 
