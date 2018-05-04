@@ -155,7 +155,7 @@
         $("#workoutContainer").html("LOADING");
 
         var sectionLinkSlug = $(this).data("href");
-        var url = "https://katy-harris-tbkz.squarespace.com" + sectionLinkSlug;
+        var url = "https://www.welllifewellness.com/" + sectionLinkSlug;
 
         $.ajax({
           url: url, 
@@ -193,7 +193,7 @@
         $("#workoutContainer").html("LOADING");
 
         $.ajax({
-          url: "https://katy-harris-tbkz.squarespace.com/workouts", 
+          url: "https://www.welllifewellness.com/workouts", 
           data: {format:"json"}, 
           dataType: "json", 
           method: "GET"
@@ -212,7 +212,7 @@
     addSideNavListeners();
 
     $.ajax({
-      url: "https://katy-harris-tbkz.squarespace.com/plans", 
+      url: "https://www.welllifewellness.com/plans", 
       data: {format:"json"}, 
       dataType: "json", 
       method: "GET"
@@ -230,7 +230,7 @@
     );
 
     $.ajax({
-      url: "https://katy-harris-tbkz.squarespace.com/workouts", 
+      url: "https://www.welllifewellness.com/workouts", 
       data: {format:"json"}, 
       dataType: "json", 
       method: "GET"
