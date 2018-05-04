@@ -2,9 +2,12 @@
   #page {
     min-height: 600px;
   }
+  #workoutContainer {
+    padding-top: 20px;
+  }
 </style>
 
-<ul id="mytab" class="nav nav-tabs">
+<ul id="topNavTabs" class="nav nav-tabs">
   <li class="nav-item dropdown">
     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Off-Season</a>
     <div class="dropdown-menu" id="offseasonMenu"></div>
@@ -182,7 +185,7 @@
 
   function addDropdownListeners(){
 
-    $("#mytab .nav-item .dropdown-menu .dropdown-item").each(function(){
+    $("#topNavTabs .nav-item .dropdown-menu .dropdown-item").each(function(){
 
       $(this).click(function(event) {
 
