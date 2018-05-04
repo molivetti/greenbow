@@ -98,6 +98,8 @@
             hideArrowsWhenOneSlide: function() { e.one(".posts .post:only-child") && e.all(".circles").addClass("hidden") },
             repositionCartButton: function() {
             	console.log(e.one("#header"));
+            	console.log($("#header"));
+            	console.log($("#header")[0].offsetHeight);
                 var t = e.one("#header").get("offsetHeight"),
                     n = e.one(".sqs-cart-dropzone");
                 n && (e.one(".transparent-header.has-banner-image") ? n.setStyle("top", t) : n.setStyle("top", t + 20))
