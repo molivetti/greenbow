@@ -227,9 +227,9 @@
         text : "Click Here to go to your Current Workout",
         id : "currentWorkoutButton",
         type : "button",
-        class : "btn btn-primary",
-        click: ajaxRequestWorkouts( currentSeason, currentWeekNumber )
+        class : "btn btn-primary"
       });
+      $(currentWorkoutButton).click(ajaxRequestWorkouts( currentSeason, currentWeekNumber ));
       console.log(currentWorkoutButton);
       $("#workoutContainer").add(currentWorkoutButton);
     }
