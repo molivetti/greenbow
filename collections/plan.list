@@ -256,7 +256,7 @@
             console.log(this.customContent.currentSeason);
             console.log(this.customContent.currentSeason != "");
             if ( this.customContent.currentSeason != "" ){ currentSeason = this.customContent.currentSeason.toLowerCase(); }
-            if ( this.customContent.currentWeekNumber != "" ){ currentSeason = this.customContent.currentWeekNumber.toLowerCase(); }
+            if ( this.customContent.currentWeekNumber != "" ){ currentWeekNumber = this.customContent.currentWeekNumber.toLowerCase(); }
           }
           constructCurrentWorkoutButton();
         });
