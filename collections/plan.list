@@ -30,7 +30,7 @@
 <script type="text/javascript">
 
   var planId = $("#planId").val();
-  var gender, level, clientFullName;
+  var gender, level, clientFullName, currentSeason, currentWeekNumber;
 
   function displaySection(){
 
@@ -191,21 +191,39 @@
         var weekNumberClicked = $(this).data("weekNumber");
 
         $("#workoutContainer").html("LOADING");
+        ajaxRequestWorkouts(seasonClicked, weekNumberClicked);
 
-        $.ajax({
-          url: "https://www.welllifewellness.com/workouts", 
-          data: {format:"json"}, 
-          dataType: "json", 
-          method: "GET"
-        })
-        .done(
-          function(data){
-            displayWorkout(data, seasonClicked, weekNumberClicked);          
-          }
-        );
       });
     });
   };
+
+  function ajaxRequestWorkouts( season, week ){
+    var url = "https://www.welllifewellness.com/workouts";
+    $.ajax({
+      url: url, 
+      data: {format:"json"}, 
+      dataType: "json", 
+      method: "GET"
+    })
+    .done(
+      function(data){
+        displayWorkout(data, season, week);          
+      }
+    );
+  }
+
+  function constructCurrentWorkoutButton(){
+    if (currentSeason != undefined && currentWeekNumber != undefined){
+      var currentWorkoutButton = $("<button>", {
+        text : "Click Here to go to your Current Workout",
+        id : "currentWorkoutButton",
+        type : "button",
+        class : "btn btn-primary",
+        click: ajaxRequestWorkouts( currentSeason, currentWeekNumber );
+      });
+      $("#workoutContainer").add(currentWorkoutButton);
+    }
+  }
 
   $(document).ready(function(){
 
@@ -221,9 +239,11 @@
       function(data){ 
         $(data.items).each(function(){
           if ( this.customContent.planId == planId ){
-            gender =          this.customContent.gender.toLowerCase();
-            level =           this.customContent.level.toLowerCase();
-            clientFullName =  this.customContent.clientFullName;
+            gender =            this.customContent.gender.toLowerCase();
+            level =             this.customContent.level.toLowerCase();
+            clientFullName =    this.customContent.clientFullName;
+            currentSeason =     this.customContent.currentSeason.toLowerCase();
+            currentWeekNumber = this.customContent.currentWeekNumber;
           }
         });
       }
@@ -243,6 +263,8 @@
         addDropdownListeners(); 
       }
     );
+
+    constructCurrentWorkoutButton();
 
   });
 
