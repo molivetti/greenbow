@@ -233,7 +233,7 @@
         ajaxRequestWorkouts( currentSeason, currentWeekNumber )
       });
       console.log(currentWorkoutButton);
-      $("#workoutContainer").add(currentWorkoutButton);
+      $("#workoutContainer").append(currentWorkoutButton);
     }
   }
 
