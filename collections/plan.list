@@ -250,6 +250,7 @@
     })
     .done(
       function(data){ 
+        console.log(data);
         $(data.items).each(function(){
           if ( this.customContent.planId == planId ){
             gender =            this.customContent.gender.toLowerCase();
@@ -281,5 +282,4 @@
     
 
   });
-console.log({@|json-pretty});
 </script>
