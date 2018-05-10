@@ -173,7 +173,6 @@
         })
         .done(
           function(data){
-            console.log(data);
             $("#workoutContainer").html($(data.mainContent).html());
             loadAllImages();
           }
@@ -256,6 +255,8 @@
             gender =            this.customContent.gender.toLowerCase();
             level =             this.customContent.level.toLowerCase();
             clientFullName =    this.customContent.clientFullName;
+            console.log(this.customContent.currentSeason);
+            console.log($(this.customContent.currentSeason).length);
             if ( $(this.customContent.currentSeason).length ){ currentSeason = this.customContent.currentSeason.toLowerCase(); }
             if ( $(this.customContent.currentWeekNumber).length ){ currentSeason = this.customContent.currentWeekNumber.toLowerCase(); }
           }
