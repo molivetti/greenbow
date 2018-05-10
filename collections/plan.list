@@ -229,7 +229,9 @@
         type : "button",
         class : "btn btn-primary"
       });
-      $(currentWorkoutButton).click(ajaxRequestWorkouts( currentSeason, currentWeekNumber ));
+      $(currentWorkoutButton).click(function(event){
+        ajaxRequestWorkouts( currentSeason, currentWeekNumber )
+      });
       console.log(currentWorkoutButton);
       $("#workoutContainer").add(currentWorkoutButton);
     }
