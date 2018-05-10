@@ -222,8 +222,6 @@
   }
 
   function constructCurrentWorkoutButton(){
-    console.log(currentSeason);
-    console.log(currentWeekNumber);
     if (currentSeason != undefined && currentWeekNumber != undefined){
       var currentWorkoutButton = $("<button>", {
         text : "Click Here to go to your Current Workout",
@@ -255,10 +253,8 @@
             gender =            this.customContent.gender.toLowerCase();
             level =             this.customContent.level.toLowerCase();
             clientFullName =    this.customContent.clientFullName;
-            console.log(this.customContent.currentSeason);
-            console.log($(this.customContent.currentSeason).length);
-            if ( $(this.customContent.currentSeason).length ){ currentSeason = this.customContent.currentSeason.toLowerCase(); }
-            if ( $(this.customContent.currentWeekNumber).length ){ currentSeason = this.customContent.currentWeekNumber.toLowerCase(); }
+            if ( this.customContent.currentSeason != "" ){ currentSeason = this.customContent.currentSeason.toLowerCase(); }
+            if ( this.customContent.currentWeekNumber != "" ){ currentSeason = this.customContent.currentWeekNumber.toLowerCase(); }
           }
           constructCurrentWorkoutButton();
         });
