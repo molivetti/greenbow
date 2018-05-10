@@ -2,9 +2,12 @@
   #page {
     min-height: 600px;
   }
+  #workoutContainer {
+    padding-top: 20px;
+  }
 </style>
 
-<ul id="mytab" class="nav nav-tabs">
+<ul id="topNavTabs" class="nav nav-tabs">
   <li class="nav-item dropdown">
     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Off-Season</a>
     <div class="dropdown-menu" id="offseasonMenu"></div>
@@ -18,7 +21,7 @@
     <div class="dropdown-menu" id="inseasonMenu"></div>
   </li>
   <li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle disabled" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Post-Season</a>
+    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Post-Season</a>
     <div class="dropdown-menu" id="postseasonMenu"></div>
   </li>
 </ul>
@@ -32,8 +35,12 @@
   var planId = $("#planId").val();
   var gender, level, clientFullName, currentSeason, currentWeekNumber;
 
-  function displaySection(){
-
+  // Load all images via Squarespace's Responsive ImageLoader
+  function loadAllImages() {
+    var images = document.querySelectorAll('img[data-src]' );
+    for (var i = 0; i < images.length; i++) {
+      ImageLoader.load(images[i], {load: true});
+    }
   }
 
   function displayWorkout(data, season, weekNumber){
@@ -65,6 +72,7 @@
       }
     });
     $("#workoutContainer").html($(workoutBody).html()); 
+    loadAllImages();
   };
 
   function createWorkoutLink(json){
@@ -155,7 +163,7 @@
         $("#workoutContainer").html("LOADING");
 
         var sectionLinkSlug = $(this).data("href");
-        var url = "https://www.welllifewellness.com/" + sectionLinkSlug;
+        var url = "https://www.welllifewellness.com" + sectionLinkSlug;
 
         $.ajax({
           url: url, 
@@ -165,7 +173,9 @@
         })
         .done(
           function(data){
-            $("#workoutContainer").html($(data.mainContent).html())
+            console.log(data);
+            $("#workoutContainer").html($(data.mainContent).html());
+            loadAllImages();
           }
         );
 
@@ -175,7 +185,7 @@
 
   function addDropdownListeners(){
 
-    $("#mytab .nav-item .dropdown-menu .dropdown-item").each(function(){
+    $("#topNavTabs .nav-item .dropdown-menu .dropdown-item").each(function(){
 
       $(this).click(function(event) {
 
