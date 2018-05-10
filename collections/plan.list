@@ -253,6 +253,8 @@
             gender =            this.customContent.gender.toLowerCase();
             level =             this.customContent.level.toLowerCase();
             clientFullName =    this.customContent.clientFullName;
+            console.log(this.customContent.currentSeason);
+            console.log(this.customContent.currentSeason != "");
             if ( this.customContent.currentSeason != "" ){ currentSeason = this.customContent.currentSeason.toLowerCase(); }
             if ( this.customContent.currentWeekNumber != "" ){ currentSeason = this.customContent.currentWeekNumber.toLowerCase(); }
           }
