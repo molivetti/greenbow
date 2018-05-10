@@ -281,5 +281,5 @@
     
 
   });
-
+console.log({@|json-pretty});
 </script>
