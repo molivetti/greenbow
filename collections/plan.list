@@ -231,6 +231,7 @@
         class : "btn btn-primary",
         click: ajaxRequestWorkouts( currentSeason, currentWeekNumber )
       });
+      console.log(currentWorkoutButton);
       $("#workoutContainer").add(currentWorkoutButton);
     }
   }
