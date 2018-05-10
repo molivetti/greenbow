@@ -255,6 +255,7 @@
             if ( $(this.customContent.currentSeason).length ){ currentSeason = this.customContent.currentSeason.toLowerCase(); }
             if ( $(this.customContent.currentWeekNumber).length ){ currentSeason = this.customContent.currentWeekNumber.toLowerCase(); }
           }
+          constructCurrentWorkoutButton();
         });
       }
     );
@@ -274,7 +275,7 @@
       }
     );
 
-    constructCurrentWorkoutButton();
+    
 
   });
 
