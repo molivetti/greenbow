@@ -223,6 +223,8 @@
   }
 
   function constructCurrentWorkoutButton(){
+    console.log(currentSeason);
+    console.log(currentWeekNumber);
     if (currentSeason != undefined && currentWeekNumber != undefined){
       var currentWorkoutButton = $("<button>", {
         text : "Click Here to go to your Current Workout",
