@@ -6,9 +6,11 @@
     padding-top: 20px;
   }
   #currentWorkoutButtonContainer {
-    padding-top: 20px;
+    padding-top: 10px;
   }
 </style>
+
+<input id="planId" name="planId" type="hidden" value="{collection.urlId}">
 
 <ul id="topNavTabs" class="nav nav-tabs">
   <li class="nav-item dropdown">
@@ -29,12 +31,11 @@
   </li>
 </ul>
 <div id="currentWorkoutButtonContainer"></div>
-
-<input id="planId" name="planId" type="hidden" value="{collection.urlId}">
-
 <div id="workoutContainer"></div>
 
 <script type="text/javascript">
+
+  console.log({@|json-pretty});
 
   var planId = $("#planId").val();
   var gender, level, clientFullName, currentSeason, currentWeekNumber;
