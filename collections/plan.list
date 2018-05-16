@@ -5,6 +5,9 @@
   #workoutContainer {
     padding-top: 20px;
   }
+  #currentWorkoutButtonContainer {
+    padding-top: 20px;
+  }
 </style>
 
 <ul id="topNavTabs" class="nav nav-tabs">
