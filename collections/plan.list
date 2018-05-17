@@ -59,11 +59,17 @@
 
   function populateSeasonMenus( workoutsList ){
     $(workoutsList).each(function(index){
+      
       var link = $("<a>");
-
       link.attr( "href",  "#" );
-      link.attr( "class", "dropdown-item" );
-      link.html( "Week " + this.weekNumber );
+      link.addClass( "dropdown-item" );
+
+      if (this.isOffWeek){
+        link.addClass( "disabled" );
+        link.html( "Week " + this.weekNumber + " - OFF" );
+      } else {
+        link.html( "Week " + this.weekNumber );
+      }
 
       link.data( "season",      this.season.toUpperCase() );
       link.data( "weekNumber",  this.weekNumber );
@@ -228,6 +234,7 @@
           newWorkout["season"] = this.customContent.season.toUpperCase();
           newWorkout["gender"] = this.customContent.gender.toUpperCase();
           newWorkout["level"] = this.customContent.level.toUpperCase();
+          newWorkout["isOffWeek"] = this.customContent.isOffWeek;
           newWorkout["content"] = this.body;
 
           var workoutExists = false;
