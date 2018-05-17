@@ -309,6 +309,8 @@
 
     $.when(getPlans, getWorkouts).done(function(plans, workouts){
       console.log("DONE");
+      console.log(plans);
+      console.log(workouts);
       $(plans.items).each(function(){
         if ( this.customContent.planId == planId ){
           clientPlan = this.customContent;
