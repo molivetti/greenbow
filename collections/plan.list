@@ -194,6 +194,7 @@
   }
   
   function getPlans(){ 
+    console.log(document.domain);
     return $.ajax({
       url: document.domain + "/plans", 
       data: {format:"json"}, 
