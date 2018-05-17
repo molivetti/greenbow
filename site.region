@@ -259,6 +259,7 @@
               .teamLogo {
                 max-width: 100%;
                 margin-bottom: .5em;
+                border: solid 2px #000;
               }
               .teamNameNav {
                 font-weight: 400;
