@@ -2,7 +2,7 @@
   #page {
     min-height: 600px;
   }
-  #workoutContainer {
+  #contentContainer {
     padding-top: 20px;
   }
   #currentWorkoutButtonContainer {
@@ -40,7 +40,7 @@
   </li>
 </ul>
 <div id="currentWorkoutButtonContainer"></div>
-<div id="workoutContainer"></div>
+<div id="contentContainer"></div>
 
 <script type="text/javascript">
 
@@ -51,6 +51,11 @@
       ImageLoader.load(images[i], {load: true});
     }
   }
+
+  function displayContent( content ){
+    $("#contentContainer").html(content);
+    loadAllImages();
+  };
 
   function displayWorkout(data, season, weekNumber){
 
@@ -80,62 +85,45 @@
         return false; 
       }
     });
-    $("#workoutContainer").html($(workoutBody).html()); 
+    $("#contentContainer").html($(workoutBody).html()); 
     loadAllImages();
   };
 
-  function createWorkoutLink(json){
+  function createSeasonMenus( workoutsList ){
+    $(workoutsList).each(function(index){
+      var link = $("<a>");
 
-    var link = $("<a>");
+      link.attr( "href",  "#" );
+      link.attr( "class", "dropdown-item" );
+      link.html( "Week " + this.weekNumber );
 
-    link.attr( "href",  "#" );
-    link.attr( "class", "dropdown-item" );
-    link.html( "Week " + json.weekNumber );
+      link.data( "season",      this.season.toUpperCase() );
+      link.data( "weekNumber",  this.weekNumber );
+      link.data( "workoutId",   index)
 
-    link.data( "season",      json.season.toLowerCase() );
-    link.data( "weekNumber",  json.weekNumber );
-
-    addWorkoutLink( link, json.season );
-    
-  };
-
-  function addWorkoutLink(link,season){
-    
-    var seasonMenu;
-    switch ( season.toLowerCase() ) {
-      case "off":
-        seasonMenu = $("#offseasonMenu");
-        break;
-      case "pre":
-        seasonMenu = $("#preseasonMenu");
-        break;
-      case "in":
-        seasonMenu = $("#inseasonMenu");
-        break;
-      case "post":
-        seasonMenu = $("#postseasonMenu");
-        break;
-      default:
-        console.log("Could not add workout link:");
-        console.log(link);
-    }
-
-    $(seasonMenu).children("a").each(function(){
-      if ( 
-        $(this).data("season") == $(link).data("season") &&
-        $(this).data("weekNumber") == $(link).data("weekNumber")
-      ){
-        $(this).remove();
+      var seasonMenu;
+      switch ( json.season.toUpperCase() ) {
+        case "OFF":
+          seasonMenu = $("#offseasonMenu");
+          break;
+        case "PRE":
+          seasonMenu = $("#preseasonMenu");
+          break;
+        case "IN":
+          seasonMenu = $("#inseasonMenu");
+          break;
+        case "POST":
+          seasonMenu = $("#postseasonMenu");
+          break;
       }
+
+      seasonMenu.append(link);
+
+      $(seasonMenu).children("a").sort(sort_menu).appendTo(seasonMenu);
+      function sort_menu(a, b) {
+        return ($(b).data("weekNumber")) < ($(a).data("weekNumber")) ? 1 : -1;
+      };
     });
-
-    seasonMenu.append(link);
-
-    $(seasonMenu).children("a").sort(sort_menu).appendTo(seasonMenu);
-    function sort_menu(a, b) {
-      return ($(b).data("weekNumber")) < ($(a).data("weekNumber")) ? 1 : -1;
-    };
-
   };
 
   function clearSideNavActiveLink(){
@@ -156,20 +144,23 @@
     });
   };
 
+  function clearActive(){
+    clearSideNavActiveLink();
+    clearDropdownActiveLink();
+    clearTabActiveLink();
+  };
+
   function addSideNavListeners(){
 
     $(".sectionLink").each(function(){
       $(this).click(function(event) {
         event.preventDefault();
 
-        clearSideNavActiveLink();
-        clearDropdownActiveLink();
-        clearTabActiveLink();
+        clearActive();
         var parentContainer = $(this).parent()[0];
         $(parentContainer).addClass("active-link");
 
-
-        $("#workoutContainer").html("LOADING");
+        $("#contentContainer").html("LOADING");
 
         var sectionLinkSlug = $(this).data("href");
         var url = "https://www.welllifewellness.com" + sectionLinkSlug;
@@ -182,7 +173,7 @@
         })
         .done(
           function(data){
-            $("#workoutContainer").html($(data.mainContent).html());
+            $("#contentContainer").html($(data.mainContent).html());
             loadAllImages();
           }
         );
@@ -195,9 +186,7 @@
     $("#currentWorkoutTab .nav-link").click(function(event){
       event.preventDefault();
 
-      clearSideNavActiveLink();
-      clearDropdownActiveLink();
-      clearTabActiveLink();
+      clearActive();
       $(this).addClass("active");
 
       ajaxRequestWorkouts( currentSeason, currentWeekNumber );
@@ -214,17 +203,18 @@
 
         event.preventDefault(); 
 
-        clearSideNavActiveLink();
-        clearDropdownActiveLink();
-        clearTabActiveLink();
+        clearActive();
         $(this).addClass("active");
         $($($(this).parent()[0]).siblings(".nav-link.dropdown-toggle")[0]).addClass("active");
 
         var seasonClicked = $(this).data("season").toLowerCase();
         var weekNumberClicked = $(this).data("weekNumber");
-
-        $("#workoutContainer").html("LOADING");
-        ajaxRequestWorkouts(seasonClicked, weekNumberClicked);
+        var workoutIdClicked = $(this).data("workoutId");
+        console.log(seasonClicked);
+        console.log(weekNumberClicked);
+        console.log(workoutIdClicked);
+        
+        displayContent(clientWorkouts[workoutIdClicked].content);
 
       });
     });
@@ -308,15 +298,13 @@
   $(document).ready(function(){
 
     $.when(getPlans(), getWorkouts()).done(function(plans, workouts){
-      console.log("DONE");
-      console.log(plans);
-      console.log(workouts);
+      //Client plan info
       $(plans[0].items).each(function(){
         if ( this.customContent.planId.toUpperCase() == planId ){
           clientPlan = this.customContent;
         }
       });
-
+      //Client workouts
       $(workouts[0].items).each(function(){
         if (  
           this.customContent.gender.toUpperCase() == clientPlan.gender.toUpperCase() && 
@@ -352,13 +340,14 @@
               clientWorkouts.splice(index, 1);
             } 
           })
-          
           if (!workoutExists){
             clientWorkouts.push(newWorkout);
           }
-          
         }
       });
+
+      createSeasonMenus(clientWorkouts);
+
       console.log(clientPlan);
       console.log(clientWorkouts);
 
@@ -377,7 +366,7 @@
     .done(
       function(data){ 
         $(data.items).each(function(){
-          createWorkoutLink(this.customContent);
+          createSeasonMenus(this.customContent);
         });
         addDropdownListeners(); 
       }
