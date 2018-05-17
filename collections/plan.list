@@ -58,7 +58,7 @@
   }
 
   function displayContent( content ){
-    $("#contentContainer").html(headerElement + content);
+    $("#contentContainer").html(content);
     loadAllImages();
   };
 
