@@ -44,9 +44,6 @@
 
 <script type="text/javascript">
 
-  var planId = $("#planId").val();
-  var gender, level, clientFullName, currentSeason, currentWeekNumber;
-
   // Load all images via Squarespace's Responsive ImageLoader
   function loadAllImages() {
     var images = document.querySelectorAll('img[data-src]' );
@@ -154,7 +151,7 @@
   };
 
   function clearTabActiveLink(){
-    $(".nav-link.dropdown-toggle").each(function(){
+    $(".nav-link").each(function(){
       $(this).removeClass("active");
     });
   };
@@ -286,6 +283,40 @@
       }
     );
   }
+
+  var getClientPlan =
+    $.ajax({
+      url: "https://www.welllifewellness.com/plans", 
+      data: {format:"json"}, 
+      dataType: "json", 
+      method: "GET"
+    })
+    .done(
+      function(data){ 
+        $(data.items).each(function(){
+          if ( this.customContent.planId == planId ){
+            return this.customContent;
+          }
+        });
+      }
+    );
+  
+  var getClientWorkouts =
+    $.ajax({
+      url: "https://www.welllifewellness.com/workouts", 
+      data: {format:"json"}, 
+      dataType: "json", 
+      method: "GET"
+    })
+    .done(
+      function(data){ 
+        return data.items;
+      }
+    );
+  
+
+  var planId = $("#planId").val();
+  var gender, level, clientFullName, currentSeason, currentWeekNumber;
 
   $(document).ready(function(){
 
