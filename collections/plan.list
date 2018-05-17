@@ -139,6 +139,7 @@
         })
         .done(
           function(data){
+            console.log(data);
             displayContent(data.mainContent);
           }
         );
