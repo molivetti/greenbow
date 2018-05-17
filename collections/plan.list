@@ -177,8 +177,13 @@
         $($($(this).parent()[0]).siblings(".nav-link.dropdown-toggle")[0]).addClass("active");
 
         var workoutIdClicked = $(this).data("workoutId");
+        var workoutWeekNumber = workoutIdClicked + 1;
+
+        var workoutTitleElement = $("<h1>");
+        workoutTitleElement.addClass("text-align-center");
+        workoutTitleElement.append("<strong>Week " + workoutWeekNumber + "</strong");
         
-        displayContent(clientWorkouts[workoutIdClicked].content);
+        displayContent(workoutTitleElement + clientWorkouts[workoutIdClicked].content);
 
       });
     });
