@@ -8,6 +8,9 @@
   #currentWorkoutButtonContainer {
     padding-top: 10px;
   }
+  #currentWorkoutButtonContainer button {
+        width: -webkit-fill-available;
+  }
 </style>
 
 <input id="planId" name="planId" type="hidden" value="{collection.urlId}">
