@@ -11,14 +11,14 @@
   #currentWorkoutButtonContainer button {
         width: -webkit-fill-available;
   }
-  #currentWorkoutTab {
+  #workoutTabs .nav-item {
     display: none;
   }
 </style>
 
 <input id="planId" name="planId" type="hidden" value="{collection.urlId}">
 
-<ul id="topNavTabs" class="nav nav-tabs">
+<ul id="workoutTabs" class="nav nav-tabs">
   <li id="currentWorkoutTab" class="nav-item">
     <a class="nav-link" href="#">This Week</a>
   </li>
@@ -62,8 +62,8 @@
     loadAllImages();
   };
 
-  function populateSeasonMenus( workoutsList ){
-    $(workoutsList).each(function(index){
+  function populateSeasonMenus(){
+    $(clientWorkouts).each(function(index){
 
       var customWeekNumber = index + 1;
       
@@ -99,6 +99,7 @@
       }
 
       seasonMenu.append(link);
+      $(seasonMenu).parent().show();
 
     });
   };
@@ -170,7 +171,7 @@
 
   function addWorkoutWeekListeners(){
 
-    $("#topNavTabs .nav-item .dropdown-menu .dropdown-item:not(.disabled)").each(function(){
+    $("#workoutTabs .nav-item .dropdown-menu .dropdown-item:not(.disabled)").each(function(){
 
       $(this).click(function(event) {
 
@@ -285,7 +286,7 @@
         return a.seasonNumber - b.seasonNumber  ||  a.weekNumber - b.weekNumber;
       });
 
-      populateSeasonMenus(clientWorkouts);
+      populateSeasonMenus();
       addWorkoutWeekListeners();
       addSideNavListeners();
 
