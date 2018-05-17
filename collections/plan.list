@@ -331,8 +331,7 @@
           newWorkout["level"] = this.customContent.level.toUpperCase();
           newWorkout["content"] = this.body;
 
-          var workoutExists = false;
-          $(clientWorkouts).each(function(){
+          $(clientWorkouts).each(function(index){
             if (
               this["weekNumber"] == newWorkout["weekNumber"] &&
               this["season"] == newWorkout["season"] &&
@@ -340,13 +339,22 @@
               this["level"] == newWorkout["level"] &&
               this["planId"] != "" 
             ){
-              workoutExists = true;
+              //Workout already exists
+            } else if (
+              this["weekNumber"] == newWorkout["weekNumber"] &&
+              this["season"] == newWorkout["season"] &&
+              this["gender"] == newWorkout["gender"] &&
+              this["level"] == newWorkout["level"] &&
+              this["planId"] == "" &&
+              newWorkout["planId"] != "" 
+            ){
+              clientWorkouts.splice(index, 1);
+              clientWorkouts.push(newWorkout);
+            } else {
+              clientWorkouts.push(newWorkout);
             }
-            console.log(workoutExists);
+
           })
-          if (!workoutExists){
-            clientWorkouts.push(newWorkout);
-          }
           
         }
       });
