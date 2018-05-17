@@ -57,38 +57,6 @@
     loadAllImages();
   };
 
-  function displayWorkout(data, season, weekNumber){
-
-    var workoutBody = "<div>Error: the workout for this week is currently not available.</div>";
-
-    $(data.items).each(function(){
-      var thisSeason  = this.customContent.season.toLowerCase();
-      var thisGender  = this.customContent.gender.toLowerCase();
-      var thisLevel   = this.customContent.level.toLowerCase();
-      if (  
-        thisSeason                    == season      && 
-        this.customContent.weekNumber == weekNumber  && 
-        thisGender                    == gender      && 
-        thisLevel                     == level       && 
-        this.customContent.planId     == planId 
-      ){ 
-        workoutBody = this.body; 
-        return false; 
-      } else if (
-        thisSeason                    == season      && 
-        this.customContent.weekNumber == weekNumber  && 
-        thisGender                    == gender      && 
-        thisLevel                     == level       && 
-        (this.customContent.planId == undefined || this.customContent.planId == "") 
-      ){ 
-        workoutBody = this.body; 
-        return false; 
-      }
-    });
-    $("#contentContainer").html($(workoutBody).html()); 
-    loadAllImages();
-  };
-
   function createSeasonMenus( workoutsList ){
     $(workoutsList).each(function(index){
       var link = $("<a>");
@@ -220,59 +188,6 @@
     });
 
   };
-
-  function ajaxRequestWorkouts( season, week ){
-    var url = "https://www.welllifewellness.com/workouts";
-    $.ajax({
-      url: url, 
-      data: {format:"json"}, 
-      dataType: "json", 
-      method: "GET"
-    })
-    .done(
-      function(data){
-        displayWorkout(data, season, week);          
-      }
-    );
-  }
-
-  function constructCurrentWorkoutButton(){
-    if (currentSeason != undefined && currentWeekNumber != undefined){
-      var currentWorkoutButton = $("<button>", {
-        text : "Click Here to go to your Current Workout",
-        id : "currentWorkoutButton",
-        type : "button",
-        class : "btn btn-primary"
-      });
-      $(currentWorkoutButton).click(function(event){
-        ajaxRequestWorkouts( currentSeason, currentWeekNumber )
-      });
-      $("#currentWorkoutButtonContainer").append(currentWorkoutButton);
-    }
-  }
-
-  function getClientPlanInfo(){
-    $.ajax({
-      url: "https://www.welllifewellness.com/plans", 
-      data: {format:"json"}, 
-      dataType: "json", 
-      method: "GET"
-    })
-    .done(
-      function(data){ 
-        $(data.items).each(function(){
-          if ( this.customContent.planId == planId ){
-            gender =            this.customContent.gender.toLowerCase();
-            level =             this.customContent.level.toLowerCase();
-            clientFullName =    this.customContent.clientFullName;
-            if ( this.customContent.currentSeason != "" ){      currentSeason =     this.customContent.currentSeason.toLowerCase(); }
-            if ( this.customContent.currentWeekNumber != "" ){  currentWeekNumber = this.customContent.currentWeekNumber.toLowerCase(); }
-          }
-          constructCurrentWorkoutButton();
-        });
-      }
-    );
-  }
   
   function getPlans(){ 
     return $.ajax({
@@ -293,7 +208,6 @@
 
   var planId = $("#planId").val().toUpperCase();
   var clientPlan, clientWorkouts = [];
-  var gender, level, clientFullName, currentSeason, currentWeekNumber;
 
   $(document).ready(function(){
 
@@ -354,11 +268,9 @@
 
     });
 
-    getClientPlanInfo();
-
     addSideNavListeners();
 
-    if (currentSeason != undefined && currentWeekNumber != undefined){
+    if (clientPlan.currentSeason != undefined && clientPlan.currentWeekNumber != undefined){
       addCurrentWeekListener();
     }
 
