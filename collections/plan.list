@@ -167,7 +167,7 @@
 
   function addDropdownListeners(){
 
-    $("#topNavTabs .nav-item .dropdown-menu .dropdown-item").each(function(){
+    $("#topNavTabs .nav-item .dropdown-menu .dropdown-item:not(.disabled)").each(function(){
 
       $(this).click(function(event) {
 
