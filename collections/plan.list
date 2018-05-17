@@ -45,13 +45,9 @@
     }
   }
 
-  function displayWorkout( content, weekNumber ){
-    var headerElement = "<h1 class='text-align-center'><strong>Week " + weekNumber + "</strong></h1>";
-    displayContent(headerElement + content);
-  }
-
-  function displayContent( content ){
-    $("#contentContainer").html(content);
+  function displayContent( title, content ){
+    var headerElement = "<h1 class='text-align-center'><strong>" + title + "</strong></h1>";
+    $("#contentContainer").html(headerElement + content);
     loadAllImages();
   };
 
@@ -140,7 +136,7 @@
         .done(
           function(data){
             console.log(data);
-            displayContent(data.mainContent);
+            displayContent(data.collection.navigationTitle, data.mainContent);
           }
         );
 
@@ -157,7 +153,7 @@
 
       $(clientWorkouts).each(function(index){
         if (this.seasonNumber == clientPlan.currentSeasonNumber && this.weekNumber == clientPlan.currentWeekNumber){
-          displayWorkout(this.content, index+1);
+          displayContent("Week " + (index+1), this.content);
         }
       });
     })
@@ -178,7 +174,7 @@
         var workoutIdClicked = $(this).data("workoutId");
         var workoutWeekNumber = workoutIdClicked + 1;
         
-        displayWorkout(clientWorkouts[workoutIdClicked].content, workoutWeekNumber);
+        displayContent("Week " + workoutWeekNumber, clientWorkouts[workoutIdClicked].content);
 
       });
     });
