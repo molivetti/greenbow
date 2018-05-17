@@ -302,7 +302,7 @@
   }
 
   var planId = $("#planId").val().toUpperCase();
-  var clientPlan, clientWorkouts = {};
+  var clientPlan, clientWorkouts = [];
   var gender, level, clientFullName, currentSeason, currentWeekNumber;
 
   $(document).ready(function(){
