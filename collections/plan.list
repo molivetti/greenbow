@@ -161,9 +161,9 @@
       clearActive();
       $(this).addClass("active");
 
-      $(clientWorkouts).each(function(){
+      $(clientWorkouts).each(function(index){
         if (this.seasonNumber == clientPlan.currentSeasonNumber && this.weekNumber == clientPlan.currentWeekNumber){
-          displayContent(this.content);
+          displayWorkout(this.content, index+1);
         }
       });
     })
