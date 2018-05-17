@@ -227,7 +227,6 @@
       });
       //Client workouts
       $(workouts[0].items).each(function(){
-        console.log(this);
         if (  
           this.customContent.gender.toUpperCase() == clientPlan.gender.toUpperCase() && 
           this.customContent.level.toUpperCase()  == clientPlan.level.toUpperCase() && 
