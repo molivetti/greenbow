@@ -8,6 +8,7 @@
   #workoutTabs .nav-item {
     display: none;
   }
+
 </style>
 
 <input id="planId" name="planId" type="hidden" value="{collection.urlId}">
@@ -125,7 +126,7 @@
         $(parentContainer).addClass("active-link");
 
         var sectionLinkSlug = $(this).data("href");
-        var url = "https://www.welllifewellness.com" + sectionLinkSlug;
+        var url = document.domain + sectionLinkSlug;
 
         $.ajax({
           url: url, 
@@ -135,7 +136,6 @@
         })
         .done(
           function(data){
-            console.log(data);
             displayContent(data.collection.navigationTitle, data.mainContent);
           }
         );
@@ -195,7 +195,7 @@
   
   function getPlans(){ 
     return $.ajax({
-      url: "https://www.welllifewellness.com/plans", 
+      url: document.domain + "/plans", 
       data: {format:"json"}, 
       dataType: "json", 
       method: "GET"
@@ -203,7 +203,7 @@
   }
   function getWorkouts(){  
     return $.ajax({
-      url: "https://www.welllifewellness.com/workouts", 
+      url: document.domain + "/workouts", 
       data: {format:"json"}, 
       dataType: "json", 
       method: "GET"
@@ -220,7 +220,6 @@
       //Client plan info
       $(plans[0].items).each(function(){
         if ( this.customContent.planId.toUpperCase() == planId ){
-          console.log(this);
           clientPlan.planId = this.customContent.planId.toUpperCase();
           clientPlan.clientFullName = this.customContent.clientFullName;
           clientPlan.gender = this.customContent.gender.toUpperCase();
@@ -231,7 +230,6 @@
       });
       //Client workouts
       $(workouts[0].items).each(function(){
-        console.log(this.customContent);
         if (  
           this.customContent.gender.toUpperCase() == clientPlan.gender.toUpperCase() && 
           this.customContent.level.toUpperCase()  == clientPlan.level.toUpperCase() && 
@@ -287,9 +285,6 @@
       } else {
         $(".folder-nav ul li.sectionLinkContainer .sectionLink").first().click();
       }
-
-      console.log(clientPlan);
-      console.log(clientWorkouts);
 
     });
 
