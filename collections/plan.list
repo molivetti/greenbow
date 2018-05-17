@@ -1,15 +1,9 @@
 <style>
   #page {
-    min-height: 600px;
+    min-height: 800px;
   }
   #contentContainer {
     padding-top: 20px;
-  }
-  #currentWorkoutButtonContainer {
-    padding-top: 10px;
-  }
-  #currentWorkoutButtonContainer button {
-        width: -webkit-fill-available;
   }
   #workoutTabs .nav-item {
     display: none;
@@ -39,7 +33,6 @@
     <div class="dropdown-menu" id="postseasonMenu"></div>
   </li>
 </ul>
-<div id="currentWorkoutButtonContainer"></div>
 <div id="contentContainer"></div>
 
 <script type="text/javascript">
