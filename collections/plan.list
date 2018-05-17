@@ -157,8 +157,11 @@
       clearActive();
       $(this).addClass("active");
 
-      ajaxRequestWorkouts( currentSeason, currentWeekNumber );
-
+      $(clientWorkouts).each(function(){
+        if (this.season.toUpperCase() == clientPlan.currentSeason.toUpperCase() && this.weekNumber == clientPlan.weekNumber){
+          displayContent(this.content);
+        }
+      });
     })
     $("#currentWorkoutTab").show();
   }
