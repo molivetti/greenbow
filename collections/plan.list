@@ -74,22 +74,22 @@
         link.html( "Week " + this.weekNumber );
       }
 
-      link.data( "season",      this.season.toUpperCase() );
+      link.data( "season",      this.seasonNumber );
       link.data( "weekNumber",  this.weekNumber );
       link.data( "workoutId",   index)
 
       var seasonMenu;
-      switch ( this.season.toUpperCase() ) {
-        case "OFF":
+      switch ( this.seasonNumber ) {
+        case 1:
           seasonMenu = $("#offseasonMenu");
           break;
-        case "PRE":
+        case 2:
           seasonMenu = $("#preseasonMenu");
           break;
-        case "IN":
+        case 3:
           seasonMenu = $("#inseasonMenu");
           break;
-        case "POST":
+        case 4:
           seasonMenu = $("#postseasonMenu");
           break;
       }
