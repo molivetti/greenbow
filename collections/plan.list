@@ -194,7 +194,6 @@
   }
   
   function getPlans(){ 
-    console.log(document.domain);
     return $.ajax({
       url: "/plans", 
       data: {format:"json"}, 
@@ -204,7 +203,7 @@
   }
   function getWorkouts(){  
     return $.ajax({
-      url: document.domain + "/workouts", 
+      url: "/workouts", 
       data: {format:"json"}, 
       dataType: "json", 
       method: "GET"
