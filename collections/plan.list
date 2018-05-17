@@ -11,12 +11,15 @@
   #currentWorkoutButtonContainer button {
         width: -webkit-fill-available;
   }
+  #currentWorkoutTab {
+    display: none;
+  }
 </style>
 
 <input id="planId" name="planId" type="hidden" value="{collection.urlId}">
 
 <ul id="topNavTabs" class="nav nav-tabs">
-  <li class="nav-item">
+  <li id="currentWorkoutTab" class="nav-item">
     <a class="nav-link" href="#">This Week</a>
   </li>
   <li class="nav-item dropdown">
@@ -191,6 +194,21 @@
     });
   };
 
+  function addCurrentWeekListener(){
+    $("#currentWorkoutTab .nav-link").click(function(event){
+      event.preventDefault();
+
+      clearSideNavActiveLink();
+      clearDropdownActiveLink();
+      clearTabActiveLink();
+      $(this).addClass("active");
+
+      ajaxRequestWorkouts( currentSeason, currentWeekNumber );
+
+    })
+    $("#currentWorkoutTab").show();
+  }
+
   function addDropdownListeners(){
 
     $("#topNavTabs .nav-item .dropdown-menu .dropdown-item").each(function(){
@@ -213,6 +231,7 @@
 
       });
     });
+
   };
 
   function ajaxRequestWorkouts( season, week ){
@@ -245,10 +264,7 @@
     }
   }
 
-  $(document).ready(function(){
-
-    addSideNavListeners();
-
+  function getClientPlanInfo(){
     $.ajax({
       url: "https://www.welllifewellness.com/plans", 
       data: {format:"json"}, 
@@ -262,13 +278,24 @@
             gender =            this.customContent.gender.toLowerCase();
             level =             this.customContent.level.toLowerCase();
             clientFullName =    this.customContent.clientFullName;
-            if ( this.customContent.currentSeason != "" ){ currentSeason = this.customContent.currentSeason.toLowerCase(); }
-            if ( this.customContent.currentWeekNumber != "" ){ currentWeekNumber = this.customContent.currentWeekNumber.toLowerCase(); }
+            if ( this.customContent.currentSeason != "" ){      currentSeason =     this.customContent.currentSeason.toLowerCase(); }
+            if ( this.customContent.currentWeekNumber != "" ){  currentWeekNumber = this.customContent.currentWeekNumber.toLowerCase(); }
           }
           constructCurrentWorkoutButton();
         });
       }
     );
+  }
+
+  function isCurrentWorkoutWeekAvailable(){
+    return ();
+  }
+
+  $(document).ready(function(){
+
+    getClientPlanInfo();
+
+    addSideNavListeners();
 
     $.ajax({
       url: "https://www.welllifewellness.com/workouts", 
@@ -285,7 +312,9 @@
       }
     );
 
-    
+    if (currentSeason != undefined && currentWeekNumber != undefined){
+      addCurrentWeekListener();
+    }
 
   });
 </script>
