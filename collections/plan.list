@@ -287,10 +287,6 @@
     );
   }
 
-  function isCurrentWorkoutWeekAvailable(){
-    return ();
-  }
-
   $(document).ready(function(){
 
     getClientPlanInfo();
