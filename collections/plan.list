@@ -102,7 +102,7 @@
       link.data( "workoutId",   index)
 
       var seasonMenu;
-      switch ( json.season.toUpperCase() ) {
+      switch ( this.season.toUpperCase() ) {
         case "OFF":
           seasonMenu = $("#offseasonMenu");
           break;
