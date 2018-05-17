@@ -59,6 +59,8 @@
 
   function populateSeasonMenus( workoutsList ){
     $(workoutsList).each(function(index){
+
+      var customWeekNumber = index + 1;
       
       var link = $("<a>");
       link.attr( "href",  "#" );
@@ -66,12 +68,12 @@
 
       if (this.isOffWeek){
         link.addClass( "disabled" );
-        link.html( "Week " + index + " - OFF" );
+        link.html( "Week " + customWeekNumber + " - OFF" );
       } else if (this.content == "") {
         link.addClass( "disabled" );
-        link.html( "Week " + index );
+        link.html( "Week " + customWeekNumber );
       } else {
-        link.html( "Week " + index );
+        link.html( "Week " + customWeekNumber );
       }
 
       link.data( "season",      this.seasonNumber );
@@ -96,10 +98,6 @@
 
       seasonMenu.append(link);
 
-      $(seasonMenu).children("a").sort(sort_menu).appendTo(seasonMenu);
-      function sort_menu(a, b) {
-        return ($(b).data("weekNumber")) < ($(a).data("weekNumber")) ? 1 : -1;
-      };
     });
   };
 
