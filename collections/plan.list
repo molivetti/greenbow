@@ -312,11 +312,13 @@
       console.log(plans);
       console.log(workouts);
       $(plans[0].items).each(function(){
-        if ( this.customContent.planId == planId ){
+        if ( this.customContent.planId.toUpperCase() == planId ){
           clientPlan = this.customContent;
         }
       });
       constructCurrentWorkoutButton();
+
+      console.log(clientPlan)
 
       $(workouts[0].items).each(function(){
         if (  
