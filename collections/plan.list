@@ -224,7 +224,8 @@
   }
 
   var planId = $("#planId").val().toUpperCase();
-  var clientPlan, clientWorkouts = [];
+  var clientPlan = {};
+  var clientWorkouts = [];
 
   $(document).ready(function(){
 
