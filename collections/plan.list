@@ -284,41 +284,57 @@
     );
   }
 
-  var getClientPlan =
+  var getPlans =
     $.ajax({
       url: "https://www.welllifewellness.com/plans", 
       data: {format:"json"}, 
       dataType: "json", 
       method: "GET"
-    })
-    .done(
-      function(data){ 
-        $(data.items).each(function(){
-          if ( this.customContent.planId == planId ){
-            return this.customContent;
-          }
-        });
-      }
-    );
+    });
   
-  var getClientWorkouts =
+  var getWorkouts =
     $.ajax({
       url: "https://www.welllifewellness.com/workouts", 
       data: {format:"json"}, 
       dataType: "json", 
       method: "GET"
-    })
-    .done(
-      function(data){ 
-        return data.items;
-      }
-    );
+    });
   
 
-  var planId = $("#planId").val();
+  var planId = $("#planId").val().toUpperCase();
+  var clientPlan, clientWorkouts = {};
   var gender, level, clientFullName, currentSeason, currentWeekNumber;
 
   $(document).ready(function(){
+
+    $.when(getPlans, getWorkouts).done(function(plans, workouts){
+      $(plans.items).each(function(){
+        if ( this.customContent.planId == planId ){
+          clientPlan = this.customContent;
+        }
+      });
+      constructCurrentWorkoutButton();
+
+      $(workouts.items).each(function(){
+        if (  
+          this.customContent.gender.toUpperCase() == clientPlan.gender.toUpperCase() && 
+          this.customContent.level.toUpperCase()  == clientPlan.level.toUpperCase() && 
+          (this.customContent.planId.toUpperCase() == clientPlan.planId.toUpperCase() || this.customContent.planId.toUpperCase() == "")
+        ){
+          var thisWorkout = {};
+          thisWorkout[weekNumber] = this.customContent.weekNumber;
+          thisWorkout[season] = this.customContent.season.toUpperCase();
+          thisWorkout[gender] = this.customContent.gender.toUpperCase()
+          thisWorkout[level] = this.customContent.level.toUpperCase()
+          thisWorkout[content] = this.body;
+
+          clientWorkouts.push(thisWorkout);
+        }
+      });
+      console.log(clientPlan);
+      console.log(clientWorkouts);
+
+    });
 
     getClientPlanInfo();
 
