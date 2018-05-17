@@ -327,11 +327,11 @@
           (this.customContent.planId.toUpperCase() == clientPlan.planId.toUpperCase() || this.customContent.planId.toUpperCase() == "")
         ){
           var thisWorkout = {};
-          thisWorkout[weekNumber] = this.customContent.weekNumber;
-          thisWorkout[season] = this.customContent.season.toUpperCase();
-          thisWorkout[gender] = this.customContent.gender.toUpperCase()
-          thisWorkout[level] = this.customContent.level.toUpperCase()
-          thisWorkout[content] = this.body;
+          thisWorkout["weekNumber"] = this.customContent.weekNumber;
+          thisWorkout["season"] = this.customContent.season.toUpperCase();
+          thisWorkout["gender"] = this.customContent.gender.toUpperCase()
+          thisWorkout["level"] = this.customContent.level.toUpperCase()
+          thisWorkout["content"] = this.body;
 
           clientWorkouts.push(thisWorkout);
         }
