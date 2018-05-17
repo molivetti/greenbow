@@ -16,8 +16,11 @@
 <input id="planId" name="planId" type="hidden" value="{collection.urlId}">
 
 <ul id="topNavTabs" class="nav nav-tabs">
+  <li class="nav-item">
+    <a class="nav-link" href="#">This Week</a>
+  </li>
   <li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Off-Season</a>
+    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Off-Season<span class="caret"></span></a>
     <div class="dropdown-menu" id="offseasonMenu"></div>
   </li>
   <li class="nav-item dropdown">
@@ -25,11 +28,11 @@
     <div class="dropdown-menu" id="preseasonMenu"></div>
   </li>
   <li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">In-Season</a>
+    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">In-Season<span class="caret"></span></a>
     <div class="dropdown-menu" id="inseasonMenu"></div>
   </li>
   <li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Post-Season</a>
+    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Post-Season<span class="caret"></span></a>
     <div class="dropdown-menu" id="postseasonMenu"></div>
   </li>
 </ul>
