@@ -125,11 +125,8 @@
         var parentContainer = $(this).parent()[0];
         $(parentContainer).addClass("active-link");
 
-        var sectionLinkSlug = $(this).data("href");
-        var url = sectionLinkSlug;
-
         $.ajax({
-          url: url, 
+          url: $(this).data("href"), 
           data: {format:"json"}, 
           dataType: "json", 
           method: "GET"
