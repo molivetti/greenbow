@@ -157,7 +157,6 @@
         }
       });
     })
-    $("#currentWorkoutTab").show();
   }
 
   function addDropdownListeners(){
@@ -259,11 +258,11 @@
 
       createSeasonMenus(clientWorkouts);
       addDropdownListeners();
-
       addSideNavListeners();
 
       if (clientPlan.currentSeason != undefined && clientPlan.currentWeekNumber != undefined){
         addCurrentWeekListener();
+        $("#currentWorkoutTab").show();
       }
 
       console.log(clientPlan);
