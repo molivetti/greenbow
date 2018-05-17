@@ -307,7 +307,7 @@
 
   $(document).ready(function(){
 
-    $.when(getPlans, getWorkouts).done(function(plans, workouts){
+    $.when(getPlans(), getWorkouts()).done(function(plans, workouts){
       console.log("DONE");
       console.log(plans);
       console.log(workouts);
