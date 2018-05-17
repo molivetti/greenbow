@@ -57,7 +57,7 @@
     loadAllImages();
   };
 
-  function createSeasonMenus( workoutsList ){
+  function populateSeasonMenus( workoutsList ){
     $(workoutsList).each(function(index){
       var link = $("<a>");
 
@@ -256,7 +256,7 @@
         }
       });
 
-      createSeasonMenus(clientWorkouts);
+      populateSeasonMenus(clientWorkouts);
       addDropdownListeners();
       addSideNavListeners();
 
