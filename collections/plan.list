@@ -76,8 +76,6 @@
         link.html( "Week " + customWeekNumber );
       }
 
-      link.data( "season",      this.seasonNumber );
-      link.data( "weekNumber",  this.weekNumber );
       link.data( "workoutId",   index)
 
       var seasonMenu;
@@ -159,7 +157,7 @@
       $(this).addClass("active");
 
       $(clientWorkouts).each(function(){
-        if (this.season.toUpperCase() == clientPlan.currentSeason.toUpperCase() && this.weekNumber == clientPlan.currentWeekNumber){
+        if (this.seasonNumber == clientPlan.currentSeasonNumber && this.weekNumber == clientPlan.currentWeekNumber){
           displayContent(this.content);
         }
       });
@@ -178,12 +176,7 @@
         $(this).addClass("active");
         $($($(this).parent()[0]).siblings(".nav-link.dropdown-toggle")[0]).addClass("active");
 
-        var seasonClicked = $(this).data("season").toLowerCase();
-        var weekNumberClicked = $(this).data("weekNumber");
         var workoutIdClicked = $(this).data("workoutId");
-        console.log(seasonClicked);
-        console.log(weekNumberClicked);
-        console.log(workoutIdClicked);
         
         displayContent(clientWorkouts[workoutIdClicked].content);
 
@@ -291,7 +284,7 @@
       addDropdownListeners();
       addSideNavListeners();
 
-      if (clientPlan.currentSeason != undefined && clientPlan.currentWeekNumber != undefined){
+      if (clientPlan.currentSeasonNumber != undefined && clientPlan.currentWeekNumber != undefined){
         addCurrentWeekListener();
         $("#currentWorkoutTab").show();
       }
