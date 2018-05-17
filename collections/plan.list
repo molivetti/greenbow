@@ -284,6 +284,22 @@
     );
   }
   
+  function getPlans(){ 
+    return $.ajax({
+      url: "https://www.welllifewellness.com/plans", 
+      data: {format:"json"}, 
+      dataType: "json", 
+      method: "GET"
+    });
+  }
+  function getWorkouts(){  
+    return $.ajax({
+      url: "https://www.welllifewellness.com/workouts", 
+      data: {format:"json"}, 
+      dataType: "json", 
+      method: "GET"
+    });
+  }
 
   var planId = $("#planId").val().toUpperCase();
   var clientPlan, clientWorkouts = {};
@@ -291,20 +307,8 @@
 
   $(document).ready(function(){
 
-    var getPlans = $.ajax({
-      url: "https://www.welllifewellness.com/plans", 
-      data: {format:"json"}, 
-      dataType: "json", 
-      method: "GET"
-    });
-    var getWorkouts = $.ajax({
-      url: "https://www.welllifewellness.com/workouts", 
-      data: {format:"json"}, 
-      dataType: "json", 
-      method: "GET"
-    });
-
     $.when(getPlans, getWorkouts).done(function(plans, workouts){
+      console.log("DONE");
       $(plans.items).each(function(){
         if ( this.customContent.planId == planId ){
           clientPlan = this.customContent;
