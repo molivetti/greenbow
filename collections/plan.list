@@ -66,12 +66,12 @@
 
       if (this.isOffWeek){
         link.addClass( "disabled" );
-        link.html( "Week " + this.weekNumber + " - OFF" );
+        link.html( "Week " + index + " - OFF" );
       } else if (this.content == "") {
         link.addClass( "disabled" );
-        link.html( "Week " + this.weekNumber );
+        link.html( "Week " + index );
       } else {
-        link.html( "Week " + this.weekNumber );
+        link.html( "Week " + index );
       }
 
       link.data( "season",      this.seasonNumber );
@@ -284,6 +284,9 @@
             clientWorkouts.push(newWorkout);
           }
         }
+      });
+      clientWorkouts.sort(function(a, b) {
+        return a.seasonNumber - b.seasonNumber  ||  a.weekNumber - b.weekNumber;
       });
 
       populateSeasonMenus(clientWorkouts);
