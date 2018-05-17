@@ -342,6 +342,7 @@
             ){
               workoutExists = true;
             }
+            console.log(workoutExists);
           })
           if (!workoutExists){
             clientWorkouts.push(newWorkout);
