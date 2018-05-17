@@ -67,6 +67,9 @@
       if (this.isOffWeek){
         link.addClass( "disabled" );
         link.html( "Week " + this.weekNumber + " - OFF" );
+      } else if (this.content == "") {
+        link.addClass( "disabled" );
+        link.html( "Week " + this.weekNumber );
       } else {
         link.html( "Week " + this.weekNumber );
       }
@@ -188,8 +191,20 @@
 
       });
     });
-
   };
+
+  function getSeasonNumber( seasonPrefix ){
+      switch ( seasonPrefix.toUpperCase() ) {
+        case "OFF":
+          return 1;
+        case "PRE":
+          return 2;
+        case "IN":
+          return 3;
+        case "POST":
+          return 4;
+      }
+  }
   
   function getPlans(){ 
     return $.ajax({
@@ -217,7 +232,12 @@
       //Client plan info
       $(plans[0].items).each(function(){
         if ( this.customContent.planId.toUpperCase() == planId ){
-          clientPlan = this.customContent;
+          clientPlan["planId"] = this.customContent.planId.toUpperCase();
+          clientPlan["clientFullName"] = this.customContent.clientFullName;
+          clientPlan["gender"] = this.customContent.gender.toUpperCase();
+          clientPlan["level"] = this.customContent.level.toUpperCase();
+          clientPlan["currentSeasonNumber"] = getSeasonNumber(this.customContent.currentSeason.toUpperCase());
+          clientPlan["currentWeekNumber"] = this.customContent.currentWeekNumber;
         }
       });
       //Client workouts
@@ -231,7 +251,7 @@
           var newWorkout = {};
           newWorkout["planId"] = this.customContent.planId.toUpperCase();
           newWorkout["weekNumber"] = this.customContent.weekNumber;
-          newWorkout["season"] = this.customContent.season.toUpperCase();
+          newWorkout["seasonNumber"] = getSeasonNumber(this.customContent.season.toUpperCase());
           newWorkout["gender"] = this.customContent.gender.toUpperCase();
           newWorkout["level"] = this.customContent.level.toUpperCase();
           newWorkout["isOffWeek"] = this.customContent.isOffWeek;
@@ -241,7 +261,7 @@
           $(clientWorkouts).each(function(index){
             if (
               this["weekNumber"] == newWorkout["weekNumber"] &&
-              this["season"] == newWorkout["season"] &&
+              this["seasonNumber"] == newWorkout["seasonNumber"] &&
               this["gender"] == newWorkout["gender"] &&
               this["level"] == newWorkout["level"] &&
               this["planId"] != "" 
@@ -249,7 +269,7 @@
               workoutExists = true;
             } else if (
               this["weekNumber"] == newWorkout["weekNumber"] &&
-              this["season"] == newWorkout["season"] &&
+              this["seasonNumber"] == newWorkout["seasonNumber"] &&
               this["gender"] == newWorkout["gender"] &&
               this["level"] == newWorkout["level"] &&
               this["planId"] == "" &&
