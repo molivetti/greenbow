@@ -347,6 +347,7 @@
       });
 
       createSeasonMenus(clientWorkouts);
+      addDropdownListeners();
 
       console.log(clientPlan);
       console.log(clientWorkouts);
@@ -356,21 +357,6 @@
     getClientPlanInfo();
 
     addSideNavListeners();
-
-    $.ajax({
-      url: "https://www.welllifewellness.com/workouts", 
-      data: {format:"json"}, 
-      dataType: "json", 
-      method: "GET"
-    })
-    .done(
-      function(data){ 
-        $(data.items).each(function(){
-          createSeasonMenus(this.customContent);
-        });
-        addDropdownListeners(); 
-      }
-    );
 
     if (currentSeason != undefined && currentWeekNumber != undefined){
       addCurrentWeekListener();
