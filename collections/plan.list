@@ -179,7 +179,7 @@
         var workoutIdClicked = $(this).data("workoutId");
         var workoutWeekNumber = workoutIdClicked + 1;
 
-        var workoutTitleElement = "<h1><strong>Week " + workoutWeekNumber + "</strong></h1>";
+        var workoutTitleElement = "<h1 class='text-align-center'><strong>Week " + workoutWeekNumber + "</strong></h1>";
         
         displayContent(workoutTitleElement + clientWorkouts[workoutIdClicked].content);
 
