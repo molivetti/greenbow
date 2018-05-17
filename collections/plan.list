@@ -196,7 +196,7 @@
   function getPlans(){ 
     console.log(document.domain);
     return $.ajax({
-      url: document.domain + "/plans", 
+      url: "/plans", 
       data: {format:"json"}, 
       dataType: "json", 
       method: "GET"
