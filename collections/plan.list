@@ -283,7 +283,7 @@
       if (clientPlan.currentSeasonNumber != undefined && clientPlan.currentWeekNumber != undefined){
         addCurrentWeekListener();
         $("#currentWorkoutTab").show();
-        $("#currentWorkoutTab").click();
+        $("#currentWorkoutTab a.navLink").click();
       } else {
         $(".folder-nav ul li.sectionLinkContainer .sectionLink").first().click();
       }
