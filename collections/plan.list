@@ -158,7 +158,7 @@
       $(this).addClass("active");
 
       $(clientWorkouts).each(function(){
-        if (this.season.toUpperCase() == clientPlan.currentSeason.toUpperCase() && this.weekNumber == clientPlan.weekNumber){
+        if (this.season.toUpperCase() == clientPlan.currentSeason.toUpperCase() && this.weekNumber == clientPlan.currentWeekNumber){
           displayContent(this.content);
         }
       });
