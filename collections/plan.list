@@ -68,8 +68,8 @@
       var customWeekNumber = index + 1;
       
       var link = $("<a>");
-      link.attr( "href",  "#" );
       link.addClass( "dropdown-item" );
+      link.data( "workoutId",   index)
 
       if (this.isOffWeek){
         link.addClass( "disabled" );
@@ -78,10 +78,9 @@
         link.addClass( "disabled" );
         link.html( "Week " + customWeekNumber );
       } else {
+        link.attr( "href",  "#" );
         link.html( "Week " + customWeekNumber );
       }
-
-      link.data( "workoutId",   index)
 
       var seasonMenu;
       switch ( this.seasonNumber ) {
