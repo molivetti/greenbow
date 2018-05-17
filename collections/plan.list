@@ -52,8 +52,13 @@
     }
   }
 
+  function displayWorkout( content, weekNumber ){
+    var headerElement = "<h1 class='text-align-center'><strong>Week " + weekNumber + "</strong></h1>";
+    displayContent(headerElement + content);
+  }
+
   function displayContent( content ){
-    $("#contentContainer").html(content);
+    $("#contentContainer").html(headerElement + content);
     loadAllImages();
   };
 
@@ -164,7 +169,7 @@
     })
   }
 
-  function addDropdownListeners(){
+  function addWorkoutWeekListeners(){
 
     $("#topNavTabs .nav-item .dropdown-menu .dropdown-item:not(.disabled)").each(function(){
 
@@ -178,10 +183,8 @@
 
         var workoutIdClicked = $(this).data("workoutId");
         var workoutWeekNumber = workoutIdClicked + 1;
-
-        var workoutTitleElement = "<h1 class='text-align-center'><strong>Week " + workoutWeekNumber + "</strong></h1>";
         
-        displayContent(workoutTitleElement + clientWorkouts[workoutIdClicked].content);
+        displayWorkout(clientWorkouts[workoutIdClicked].content, workoutWeekNumber);
 
       });
     });
@@ -284,7 +287,7 @@
       });
 
       populateSeasonMenus(clientWorkouts);
-      addDropdownListeners();
+      addWorkoutWeekListeners();
       addSideNavListeners();
 
       if (clientPlan.currentSeasonNumber != undefined && clientPlan.currentWeekNumber != undefined){
