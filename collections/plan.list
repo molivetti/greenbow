@@ -263,16 +263,18 @@
       createSeasonMenus(clientWorkouts);
       addDropdownListeners();
 
+      addSideNavListeners();
+
+      if (clientPlan.currentSeason != undefined && clientPlan.currentWeekNumber != undefined){
+        addCurrentWeekListener();
+      }
+
       console.log(clientPlan);
       console.log(clientWorkouts);
 
     });
 
-    addSideNavListeners();
 
-    if (clientPlan.currentSeason != undefined && clientPlan.currentWeekNumber != undefined){
-      addCurrentWeekListener();
-    }
 
   });
 </script>
