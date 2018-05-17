@@ -232,6 +232,7 @@
       //Client plan info
       $(plans[0].items).each(function(){
         if ( this.customContent.planId.toUpperCase() == planId ){
+          console.log(this);
           clientPlan["planId"] = this.customContent.planId.toUpperCase();
           clientPlan["clientFullName"] = this.customContent.clientFullName;
           clientPlan["gender"] = this.customContent.gender.toUpperCase();
