@@ -233,12 +233,12 @@
       $(plans[0].items).each(function(){
         if ( this.customContent.planId.toUpperCase() == planId ){
           console.log(this);
-          clientPlan["planId"] = this.customContent.planId.toUpperCase();
-          clientPlan["clientFullName"] = this.customContent.clientFullName;
-          clientPlan["gender"] = this.customContent.gender.toUpperCase();
-          clientPlan["level"] = this.customContent.level.toUpperCase();
-          clientPlan["currentSeasonNumber"] = getSeasonNumber(this.customContent.currentSeason.toUpperCase());
-          clientPlan["currentWeekNumber"] = this.customContent.currentWeekNumber;
+          clientPlan.planId = this.customContent.planId.toUpperCase();
+          clientPlan.clientFullName = this.customContent.clientFullName;
+          clientPlan.gender = this.customContent.gender.toUpperCase();
+          clientPlan.level = this.customContent.level.toUpperCase();
+          clientPlan.currentSeasonNumber = getSeasonNumber(this.customContent.currentSeason.toUpperCase());
+          clientPlan.currentWeekNumber = this.customContent.currentWeekNumber;
         }
       });
       //Client workouts
