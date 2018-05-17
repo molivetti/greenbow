@@ -21,7 +21,7 @@
     <div class="dropdown-menu" id="offseasonMenu"></div>
   </li>
   <li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" href="#">Pre-Season</a>
+    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Pre-Season<span class="caret"></span></a>
     <div class="dropdown-menu" id="preseasonMenu"></div>
   </li>
   <li class="nav-item dropdown">
@@ -37,8 +37,6 @@
 <div id="workoutContainer"></div>
 
 <script type="text/javascript">
-
-  console.log({@|json-pretty});
 
   var planId = $("#planId").val();
   var gender, level, clientFullName, currentSeason, currentWeekNumber;
