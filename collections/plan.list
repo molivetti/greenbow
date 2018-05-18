@@ -24,6 +24,7 @@
   .dropdown-item.disabled, .dropdown-item:disabled {
     color: #6c757d;
     background-color: transparent;
+    cursor: not-allowed;
   }
   .nav-tabs .nav-link.disabled {
     color: #6c757d;
