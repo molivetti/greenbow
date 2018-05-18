@@ -330,7 +330,7 @@
               var description = data.items[0].snippet.description;
               console.log(description);
               //Remove unicode bullets
-              description = description.replace("\u2022\s*","");
+              description = description.replace("/\u2022\s*/g","");
               console.log(description);
               description = description.split(/\n/);
               console.log(description);
