@@ -75,15 +75,21 @@
 </ul>
 <div id="contentContainer"></div>
 <!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="videoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"></h5>
+      </div>
       <div class="modal-body">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>        
         <!-- 16:9 aspect ratio -->
         <div class="embed-responsive embed-responsive-16by9">
-          <iframe class="embed-responsive-item" src="" id="video"  allowscriptaccess="always">></iframe>
+          <iframe class="embed-responsive-item" src="" id="videoIframe"  allowscriptaccess="always">></iframe>
         </div>
+      </div>
+      <div class="modal-footer">
+        
       </div>
     </div>
   </div>
@@ -244,19 +250,32 @@
         var videoId = match[2];
         var key = "AIzaSyAB9zUaNqJe1JlCIfpFaFZ_SQE5fdAiJJc";
         var youtubeUrl = "https://www.googleapis.com/youtube/v3/videos?id="+videoId+"&key="+key+"&part=snippet&callback=?";
-        $.getJSON(youtubeUrl,function(data){
-          if (typeof(data.items[0]) != "undefined") {
-            console.log('video exists ' + data.items[0].snippet.title);
-            console.log(data.items[0].snippet.description);
-          } else {
-            console.log('video not exists');
-          }   
+
+        $(this).click(function(event){
+          event.preventDefault();
+          $.getJSON(youtubeUrl,function(data){
+            if (typeof(data.items[0]) != "undefined") {
+
+              var formattedVideoUrl = "https://www.youtube.com/embed/" + videoId + "?rel=0&amp;showinfo=0&amp;modestbranding=1&amp;autoplay=1";
+
+              $("#videoModal .modal-title").text(data.items[0].snippet.title);
+              $("#videoIframe").attr("src", formattedVideoUrl);
+              $("#videoModal").text(data.items[0].snippet.description);
+
+              $("#videoModal .modal-footer").modal();
+
+            } else {
+              console.log('video not exists');
+            }   
+          });
         });
+
       } else {
         console.log("ERROR");
-        console.log("url");
+        console.log(url);
       }
     });
+
     var $videoSrc;  
     $('.video-btn').click(function() {
         $videoSrc = $(this).data( "src" );
