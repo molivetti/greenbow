@@ -83,6 +83,12 @@
   #workoutTabs .nav-item {
     display: none;
   }
+  #workoutTabs .nav-link {
+    font-size: 24px;
+  }
+  #workoutTabs .dropdown-item {
+    font-size: 20px;
+  }
 
   .modal-dialog {
     max-width: 800px;
