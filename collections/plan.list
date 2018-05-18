@@ -333,7 +333,18 @@
 
               $("#videoModal .modal-title").text(data.items[0].snippet.title);
               $("#videoIframe").attr("src", formattedVideoUrl);
-              $("#videoModal .modal-footer").html(data.items[0].snippet.description);
+
+              var description = $(data.items[0].snippet.description).text().split(/\n/);
+              if ( description.length > 1 ){
+                var list = $("<ul>")
+                $(description).each(function(){
+                  var listItem = $("<li>").text(this);
+                  list.append(listItem);
+                });
+                $("#videoModal .modal-footer").html(list);
+              } else {
+                $("#videoModal .modal-footer").text(description);
+              }
 
               $("#videoModal").modal();
 
