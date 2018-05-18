@@ -284,9 +284,9 @@
 
               $("#videoModal .modal-title").text(data.items[0].snippet.title);
               $("#videoIframe").attr("src", formattedVideoUrl);
-              $("#videoModal").text(data.items[0].snippet.description);
+              $("#videoModal .modal-footer").text(data.items[0].snippet.description);
 
-              $("#videoModal .modal-footer").modal();
+              $("#videoModal").modal();
 
             } else {
               console.log('video not exists');
