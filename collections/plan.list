@@ -336,6 +336,7 @@
               $("#videoModal .modal-title").text(data.items[0].snippet.title);
               $("#videoIframe").attr("src", formattedVideoUrl);
               console.log(data.items[0].snippet.description);
+              console.log(data.items[0].snippet.description.split(/\n/));
               console.log($(data.items[0].snippet.description));
               var description = $(data.items[0].snippet.description).split(/\n/);
               console.log(description);
