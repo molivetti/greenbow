@@ -329,6 +329,8 @@
               console.log("LOADED JSON");
               console.log(data.items[0].snippet.title);
 
+              console.log(data);
+
               var formattedVideoUrl = "https://www.youtube.com/embed/" + videoId + "?rel=0&amp;showinfo=0&amp;modestbranding=1&amp;autoplay=1";
 
               $("#videoModal .modal-title").text(data.items[0].snippet.title);
