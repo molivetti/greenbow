@@ -100,6 +100,22 @@
     font-weight: normal;
     color:#fff;
     opacity:1;
+    float: right;
+    line-height: 1;
+    text-shadow: 0 1px 0 #fff;
+    text-transform: none;
+    overflow: visible;
+    margin: 0;
+    font-family: inherit;
+  }
+  .close:not(:disabled):not(.disabled) {
+    cursor: pointer;
+  }
+  button.close {
+    padding: 0;
+    background-color: transparent;
+    border: 0;
+    -webkit-appearance: none;
   }
 
 </style>
