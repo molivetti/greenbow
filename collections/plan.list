@@ -84,10 +84,14 @@
     display: none;
   }
   #workoutTabs .nav-link {
-    font-size: 24px;
+    font-size: 20px;
   }
   #workoutTabs .dropdown-item {
-    font-size: 20px;
+    font-size: 16px;
+  }
+  #workoutTabs .dropdown-item:hover {
+    text-decoration: none;
+    background-color: #cbd3da;
   }
 
   .modal-dialog {
