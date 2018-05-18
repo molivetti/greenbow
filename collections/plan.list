@@ -74,6 +74,20 @@
   </li>
 </ul>
 <div id="contentContainer"></div>
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>        
+        <!-- 16:9 aspect ratio -->
+        <div class="embed-responsive embed-responsive-16by9">
+          <iframe class="embed-responsive-item" src="" id="video"  allowscriptaccess="always">></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 
 
 <script type="text/javascript">
 
@@ -89,6 +103,7 @@
     var headerElement = "<h1 class='text-align-center'><strong>" + title + "</strong></h1>";
     $("#contentContainer").html(headerElement + content);
     loadAllImages();
+    setupVideoLinks();
   };
 
   function populateSeasonMenus(){
@@ -215,6 +230,53 @@
       });
     });
   };
+
+  function setupVideoLinks(){
+    $("#contentContainer a").each(function(){
+      var url = this.href;
+      var regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+      var match = url.match(regExp);
+      if (match && match[2].length == 11) {
+        console.log("SUCCESS");
+        console.log("url");
+        console.log(match[2]);
+
+        var videoId = match[2];
+        var key = "AIzaSyAB9zUaNqJe1JlCIfpFaFZ_SQE5fdAiJJc";
+        var youtubeUrl = "https://www.googleapis.com/youtube/v3/videos?id="+videoId+"&key="+key+"&part=snippet&callback=?";
+        $.getJSON(youtubeUrl,function(data){
+          if (typeof(data.items[0]) != "undefined") {
+            console.log('video exists ' + data.items[0].snippet.title);
+            console.log(data.items[0].snippet.description);
+          } else {
+            console.log('video not exists');
+          }   
+        });
+      } else {
+        console.log("ERROR");
+        console.log("url");
+      }
+    });
+    var $videoSrc;  
+    $('.video-btn').click(function() {
+        $videoSrc = $(this).data( "src" );
+    });
+    console.log($videoSrc);
+
+    // when the modal is opened autoplay it  
+    $('#myModal').on('shown.bs.modal', function (e) {
+        
+    // set the video src to autoplay and not to show related video. Youtube related video is like a box of chocolates... you never know what you're gonna get
+    $("#video").attr('src',$videoSrc + "?rel=0&amp;showinfo=0&amp;modestbranding=1&amp;autoplay=1" ); 
+    })
+      
+    // stop playing the youtube video when I close the modal
+    $('#myModal').on('hide.bs.modal', function (e) {
+        // a poor man's stop video
+        $("#video").attr('src',$videoSrc); 
+    }) 
+
+  }
 
   function getSeasonNumber( seasonPrefix ){
       switch ( seasonPrefix.toUpperCase() ) {
