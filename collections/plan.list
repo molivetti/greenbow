@@ -2,7 +2,7 @@
   .dropdown-item {
     display: block;
     width: 100%;
-    padding: 0.25rem 1.5rem;
+    padding: 0.8rem 1.5rem;
     clear: both;
     font-weight: 400;
     color: #212529;
@@ -90,6 +90,7 @@
     font-size: 16px;
   }
   #workoutTabs .dropdown-item:hover {
+    color: #16181b;
     text-decoration: none;
     background-color: #cbd3da;
   }
