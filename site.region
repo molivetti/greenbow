@@ -266,7 +266,6 @@
               }
               #folderNav {
                 float: left;
-                padding-right: ;
               }
               #sideNavTest {
                 float: left;
