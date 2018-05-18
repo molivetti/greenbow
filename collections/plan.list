@@ -87,6 +87,9 @@
     max-width: 800px;
     margin: 30px auto;
   }
+  .modal-title {
+    text-align: center;
+  }
   .modal-body {
     position:relative;
     padding:0px;
@@ -153,7 +156,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h5 class="modal-title"></h5>
+        <h1 class="modal-title"></h1>
       </div>
       <div class="modal-body">        
         <!-- 16:9 aspect ratio -->
@@ -328,12 +331,9 @@
               $("#videoIframe").attr("src", formattedVideoUrl);
 
               var description = data.items[0].snippet.description;
-              console.log(description);
               //Remove unicode bullets
               description = description.replace(/\u2022\s*/g,"");
-              console.log(description);
               description = description.split(/\n/);
-              console.log(description);
               if ( description.length > 1 ){
                 var list = $("<ul>")
                 $(description).each(function(){
@@ -358,26 +358,6 @@
         console.log(url);
       }
     });
-
-    var $videoSrc;  
-    $('.video-btn').click(function() {
-        $videoSrc = $(this).data( "src" );
-    });
-    console.log($videoSrc);
-
-    // when the modal is opened autoplay it  
-    $('#myModal').on('shown.bs.modal', function (e) {
-        
-    // set the video src to autoplay and not to show related video. Youtube related video is like a box of chocolates... you never know what you're gonna get
-    $("#video").attr('src',$videoSrc + "?rel=0&amp;showinfo=0&amp;modestbranding=1&amp;autoplay=1" ); 
-    })
-      
-    // stop playing the youtube video when I close the modal
-    $('#myModal').on('hide.bs.modal', function (e) {
-        // a poor man's stop video
-        $("#video").attr('src',$videoSrc); 
-    }) 
-
   }
 
   function getSeasonNumber( seasonPrefix ){
