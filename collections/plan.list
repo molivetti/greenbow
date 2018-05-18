@@ -253,8 +253,13 @@
 
         $(this).click(function(event){
           event.preventDefault();
+          console.log("CLICKED");
+          console.log(this);
           $.getJSON(youtubeUrl,function(data){
             if (typeof(data.items[0]) != "undefined") {
+
+              console.log("LOADED JSON");
+              console.log(data.items[0].snippet.title);
 
               var formattedVideoUrl = "https://www.youtube.com/embed/" + videoId + "?rel=0&amp;showinfo=0&amp;modestbranding=1&amp;autoplay=1";
 
