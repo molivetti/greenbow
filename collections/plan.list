@@ -334,7 +334,7 @@
               $("#videoModal .modal-title").text(data.items[0].snippet.title);
               $("#videoIframe").attr("src", formattedVideoUrl);
 
-              var description = $(data.items[0].snippet.description).text().split(/\n/);
+              var description = $(data.items[0].snippet.description).split(/\n/);
               if ( description.length > 1 ){
                 var list = $("<ul>")
                 $(description).each(function(){
