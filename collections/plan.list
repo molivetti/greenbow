@@ -314,32 +314,24 @@
       var regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
       var match = url.match(regExp);
       if (match && match[2].length == 11) {
-        console.log("SUCCESS");
-        console.log("url");
-        console.log(match[2]);
-
         var videoId = match[2];
         var key = "AIzaSyAB9zUaNqJe1JlCIfpFaFZ_SQE5fdAiJJc";
         var youtubeUrl = "https://www.googleapis.com/youtube/v3/videos?id="+videoId+"&key="+key+"&part=snippet&callback=?";
 
         $(this).click(function(event){
           event.preventDefault();
-          console.log("CLICKED");
-          console.log(this);
           $.getJSON(youtubeUrl,function(data){
             if (typeof(data.items[0]) != "undefined") {
-
-              console.log("LOADED JSON");
-              console.log(data.items[0].snippet.title);
-
               var formattedVideoUrl = "https://www.youtube.com/embed/" + videoId + "?rel=0&amp;showinfo=0&amp;modestbranding=1&amp;autoplay=1";
 
               $("#videoModal .modal-title").text(data.items[0].snippet.title);
               $("#videoIframe").attr("src", formattedVideoUrl);
 
               var description = data.items[0].snippet.description;
+              console.log(description);
               //Remove unicode bullets
               description = description.replace("\u2022\s*","");
+              console.log(description);
               description = description.split(/\n/);
               console.log(description);
               if ( description.length > 1 ){
@@ -348,7 +340,6 @@
                   var listItem = $("<li>").text(this);
                   list.append(listItem);
                 });
-                console.log(list);
                 $("#videoModal .modal-footer").html(list);
               } else {
                 $("#videoModal .modal-footer").text(description);
