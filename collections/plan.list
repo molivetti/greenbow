@@ -278,7 +278,7 @@
         //Create URL query string to prevent cache load
         var randomNumber = (new Date()).getTime(); 
         $.ajax({
-          url: $(this).data("href")+randomNumber, 
+          url: $(this).data("href")+"?q="+randomNumber, 
           data: {format:"json"}, 
           dataType: "json", 
           method: "GET"
