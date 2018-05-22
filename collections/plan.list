@@ -275,8 +275,10 @@
         var parentContainer = $(this).parent()[0];
         $(parentContainer).addClass("active-link");
 
+        //Create URL query string to prevent cache load
+        var randomNumber = (new Date()).getTime(); 
         $.ajax({
-          url: $(this).data("href"), 
+          url: $(this).data("href")+randomNumber, 
           data: {format:"json"}, 
           dataType: "json", 
           method: "GET"
