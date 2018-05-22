@@ -192,10 +192,14 @@
   }
 
   function displayContent( title, content ){
+    $("#contentContainer").hide();
+
     var headerElement = "<h1 class='text-align-center'><strong>" + title + "</strong></h1>";
     $("#contentContainer").html(headerElement + content);
     loadAllImages();
     setupVideoLinks();
+
+    $("#contentContainer").fadeIn("fast");
   };
 
   function populateSeasonMenus(){
