@@ -1,6 +1,9 @@
 
 // Load all images via Squarespace's Responsive ImageLoader
 function loadAllImages() {
+  if (typeof ImageLoader === "undefined"){
+    return true
+  }
   var images = document.querySelectorAll('img[data-src]' );
   for (var i = 0; i < images.length; i++) {
     ImageLoader.load(images[i], {load: true});
@@ -21,7 +24,11 @@ function displayContent( title, content ){
 function populateFolderNav( folder ){
   var nav = $("#folderNav nav");
   var teamLogo = $("<img>").attr("id", "teamLogo");
-  teamLogo.attr("src", "/s/" + folder.urlId + "Logo.jpg");
+  var imgSrc = "/s/" + folder.urlId + "Logo.jpg";
+  if ( isDevEnvironment() ){
+    imgSrc = folder.urlId + "Logo.jpg";
+  }
+  teamLogo.attr("src", imgSrc);
   nav.append(teamLogo);
 
   var ul = $("<ul>");
