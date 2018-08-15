@@ -232,7 +232,7 @@ function getSeasonNumber( seasonPrefix ){
 }
 
 function isDevEnvironment(){
-  if ( $(location)[0].hostname == "localhost" ){
+  if ( $(location)[0].hostname == "localhost" || $(location)[0].hostname == "molivetti.github.io" ){
     return true;
   } else {
     return false;
