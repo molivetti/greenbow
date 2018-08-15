@@ -18,6 +18,33 @@ function displayContent( title, content ){
   $("#contentContainer").fadeIn("fast");
 };
 
+function populateFolderNav( folder ){
+  var nav = $("#folderNav nav");
+  var teamLogo = $("<img>").attr("id", "teamLogo");
+  teamLogo.attr("src", "/s/" + folder.urlId + "Logo.jpg");
+  nav.append(teamLogo);
+
+  var ul = $("<ul>");
+  var teamNameNav = $("<li>").attr("id","teamNameNav");
+  teamNameNav.attr("class","nav-section-label");
+  teamNameNav.text(folder.title);
+  ul.append(teamNameNav);
+
+  $(folder.collections).each(function(index){
+    var sectionLinkContainer = $("<li>").attr("class","sectionLinkContainer");
+    var sectionLink = $("<a>").attr("class","sectionLink");
+    sectionLink.attr("href","#");
+    sectionLink.attr("data-href",this.fullUrl);
+    sectionLink.text(this.navigationTitle);
+
+    sectionLinkContainer.append(sectionLink);
+    ul.append(sectionLinkContainer);
+  })
+
+  nav.append(ul);
+  $("#folderNav").show();
+}
+
 function populateSeasonMenus(){
   $(clientWorkouts).each(function(index){
 
@@ -204,34 +231,67 @@ function getSeasonNumber( seasonPrefix ){
     }
 }
 
-function getPlans(){
-  //Create URL query string to prevent cache load
-  var randomNumber = (new Date()).getTime(); 
-  return $.ajax({
-    url: "/plans?q="+randomNumber, 
-    data: {format:"json"}, 
-    dataType: "json", 
-    method: "GET"
-  });
-}
-function getWorkouts(){  
-  //Create URL query string to prevent cache load
-  var randomNumber = (new Date()).getTime(); 
-  return $.ajax({
-    url: "/workouts?q="+randomNumber, 
-    data: {format:"json"}, 
-    dataType: "json", 
-    method: "GET"
-  });
+function isDevEnvironment(){
+  if ( $(location)[0].hostname == "localhost" ){
+    return true;
+  } else {
+    return false;
+  }
 }
 
-var planId = $("#planId").val().toUpperCase();
+function getPlans(){
+  if ( isDevEnvironment() ){
+    return $.getJSON("scripts/testData/plans.json");
+  } else {
+    //Create URL query string to prevent cache load
+    var randomNumber = (new Date()).getTime(); 
+    return $.ajax({
+      url: "/plans?q="+randomNumber, 
+      data: {format:"json"}, 
+      dataType: "json", 
+      method: "GET"
+    });
+  }
+}
+function getWorkouts(){  
+  if ( isDevEnvironment() ){
+    return $.getJSON("scripts/testData/workouts.json");
+  } else {
+    //Create URL query string to prevent cache load
+    var randomNumber = (new Date()).getTime(); 
+    return $.ajax({
+      url: "/workouts?q="+randomNumber, 
+      data: {format:"json"}, 
+      dataType: "json", 
+      method: "GET"
+    });
+  }
+}
+function getConfig(){  
+  if ( isDevEnvironment() ){
+    return $.getJSON("scripts/testData/config.json");
+  } else {
+    //Create URL query string to prevent cache load
+    var randomNumber = (new Date()).getTime(); 
+    return $.ajax({
+      url: "?q="+randomNumber, 
+      data: {format:"json"}, 
+      dataType: "json", 
+      method: "GET"
+    });
+  }
+}
+
+var planId = "";
 var clientPlan = {};
 var clientWorkouts = [];
 
 $(document).ready(function(){
 
-  $.when(getPlans(), getWorkouts()).done(function(plans, workouts){
+  $.when( getPlans(), getWorkouts(), getConfig() ).done( function( plans, workouts, config ){
+
+    planId = config[0].collection.urlId.toUpperCase();
+    
     //Client plan info
     $(plans[0].items).each(function(){
       if ( this.customContent.planId.toUpperCase() == planId ){
@@ -289,6 +349,7 @@ $(document).ready(function(){
       return a.seasonNumber - b.seasonNumber  ||  a.weekNumber - b.weekNumber;
     });
 
+    populateFolderNav( config[0].collection );
     populateSeasonMenus();
     addWorkoutWeekListeners();
     addSideNavListeners();

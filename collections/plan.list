@@ -1,184 +1,219 @@
 <style>
-  .dropdown-item {
-    display: block;
-    width: 100%;
-    padding: 0.8rem 1.5rem;
-    clear: both;
-    font-weight: 400;
-    color: #212529;
-    text-align: inherit;
-    white-space: nowrap;
-    background-color: transparent;
-    border: 0;
-  }
-  .dropdown-item:hover, .dropdown-item:focus {
-    color: #16181b;
-    text-decoration: none;
-    background-color: #f8f9fa;
-  }
-  .dropdown-item.active, .dropdown-item:active {
-    color: #fff;
-    text-decoration: none;
-    background-color: #007bff;
-  }
-  .dropdown-item.disabled, .dropdown-item:disabled {
-    color: #6c757d;
-    background-color: transparent;
-    cursor: not-allowed;
-  }
-  .nav-tabs .nav-link.disabled {
-    color: #6c757d;
-    background-color: transparent;
-    border-color: transparent;
-  }
-  .nav-link.active {
-    color: #495057;
-    background-color: #fff;
-    border-color: #dee2e6 #dee2e6 #fff;
-  }
-  .embed-responsive {
-    position: relative;
-    display: block;
-    width: 100%;
-    padding: 0;
-    overflow: hidden;
-  }
-  .embed-responsive::before {
-    display: block;
-    content: "";
-  }
-  .embed-responsive .embed-responsive-item,
-  .embed-responsive iframe,
-  .embed-responsive embed,
-  .embed-responsive object,
-  .embed-responsive video {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border: 0;
-  }
-  .embed-responsive-21by9::before {
-    padding-top: 42.857143%;
-  }
-  .embed-responsive-16by9::before {
-    padding-top: 56.25%;
-  }
-  .embed-responsive-4by3::before {
-    padding-top: 75%;
-  }
-  .embed-responsive-1by1::before {
-    padding-top: 100%;
-  }
+.hide-page-sidebar #folderNav+#content {
+  display: inline-block;
+}
+.hide-page-sidebar #folderNav {
+  display: inline-block;
+}
+.hide-page-sidebar #content{
+  width: calc(100% - 255px);
+  display: inline-block;
+  vertical-align: top;
+}
+#teamLogo {
+  max-width: 100%;
+  margin-bottom: .5em;
+  border: solid 2px #000;
+}
+#teamNameNav {
+  font-weight: 400;
+}
+#folderNav {
+  float: left;
+  display: none;
+}
+#sideNavTest {
+  float: left;
+}
+.dropdown-item {
+  display: block;
+  width: 100%;
+  padding: 0.8rem 1.5rem;
+  clear: both;
+  font-weight: 400;
+  color: #212529;
+  text-align: inherit;
+  white-space: nowrap;
+  background-color: transparent;
+  border: 0;
+}
+.dropdown-item:hover, .dropdown-item:focus {
+  color: #16181b;
+  text-decoration: none;
+  background-color: #f8f9fa;
+}
+.dropdown-item.active, .dropdown-item:active {
+  color: #fff;
+  text-decoration: none;
+  background-color: #007bff;
+}
+.dropdown-item.disabled, .dropdown-item:disabled {
+  color: #6c757d;
+  background-color: transparent;
+  cursor: not-allowed;
+}
+.nav-tabs .nav-link.disabled {
+  color: #6c757d;
+  background-color: transparent;
+  border-color: transparent;
+}
+.nav-link.active {
+  color: #495057;
+  background-color: #fff;
+  border-color: #dee2e6 #dee2e6 #fff;
+}
+.embed-responsive {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
+  overflow: hidden;
+}
+.embed-responsive::before {
+  display: block;
+  content: "";
+}
+.embed-responsive .embed-responsive-item,
+.embed-responsive iframe,
+.embed-responsive embed,
+.embed-responsive object,
+.embed-responsive video {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+.embed-responsive-21by9::before {
+  padding-top: 42.857143%;
+}
+.embed-responsive-16by9::before {
+  padding-top: 56.25%;
+}
+.embed-responsive-4by3::before {
+  padding-top: 75%;
+}
+.embed-responsive-1by1::before {
+  padding-top: 100%;
+}
 
-  #page {
-    min-height: 800px;
-    max-width: 80%;
-  }
-  #contentContainer {
-    padding-top: 20px;
-  }
-  #workoutTabs .nav-item {
-    display: none;
-  }
-  #workoutTabs .nav-link {
-    font-size: 20px;
-  }
-  #workoutTabs .dropdown-item {
-    font-size: 16px;
-  }
-  #workoutTabs .dropdown-item:hover {
-    color: #16181b;
-    text-decoration: none;
-    background-color: #cbd3da;
-  }
+#page {
+  min-height: 800px;
+  max-width: 80%;
+}
+#contentContainer {
+  padding-top: 20px;
+}
+#workoutTabs .nav-item {
+  display: none;
+}
+#workoutTabs .nav-link {
+  font-size: 20px;
+}
+#workoutTabs .dropdown-item {
+  font-size: 16px;
+}
+#workoutTabs .dropdown-item:hover {
+  color: #16181b;
+  text-decoration: none;
+  background-color: #cbd3da;
+}
 
-  .modal-dialog {
-    max-width: 800px;
-    margin: 30px auto;
-  }
-  .modal-title {
-    text-align: center;
-  }
-  .modal-body {
-    position:relative;
-    padding:0px;
-  }
-  .modal-footer {
-    text-align: left;
-  }
-  .close {
-    position:absolute;
-    right:-30px;
-    top:0;
-    z-index:999;
-    font-size:32px;
-    font-weight: normal;
-    color:#fff;
-    opacity:1;
-    float: right;
-    line-height: 1;
-    text-shadow: 0 1px 0 #fff;
-    text-transform: none;
-    overflow: visible;
-    margin: 0;
-    font-family: inherit;
-  }
-  .close:not(:disabled):not(.disabled) {
-    cursor: pointer;
-  }
-  button.close {
-    padding: 0;
-    background-color: transparent;
-    border: 0;
-    -webkit-appearance: none;
-  }
-
+.modal-dialog {
+  max-width: 800px;
+  margin: 30px auto;
+}
+.modal-title {
+  text-align: center;
+}
+.modal-body {
+  position:relative;
+  padding:0px;
+}
+.modal-footer {
+  text-align: left;
+}
+.close {
+  position:absolute;
+  right:-30px;
+  top:0;
+  z-index:999;
+  font-size:32px;
+  font-weight: normal;
+  color:#fff;
+  opacity:1;
+  float: right;
+  line-height: 1;
+  text-shadow: 0 1px 0 #fff;
+  text-transform: none;
+  overflow: visible;
+  margin: 0;
+  font-family: inherit;
+}
+.close:not(:disabled):not(.disabled) {
+  cursor: pointer;
+}
+button.close {
+  padding: 0;
+  background-color: transparent;
+  border: 0;
+  -webkit-appearance: none;
+}
 </style>
 
-<input id="planId" name="planId" type="hidden" value="{collection.urlId}">
+<main id="page" role="main">
 
-<ul id="workoutTabs" class="nav nav-tabs">
-  <li id="currentWorkoutTab" class="nav-item">
-    <a class="nav-link" href="#">This Week</a>
-  </li>
-  <li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Off-Season<span class="caret"></span></a>
-    <div class="dropdown-menu" id="offseasonMenu"></div>
-  </li>
-  <li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Pre-Season<span class="caret"></span></a>
-    <div class="dropdown-menu" id="preseasonMenu"></div>
-  </li>
-  <li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">In-Season<span class="caret"></span></a>
-    <div class="dropdown-menu" id="inseasonMenu"></div>
-  </li>
-  <li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Post-Season<span class="caret"></span></a>
-    <div class="dropdown-menu" id="postseasonMenu"></div>
-  </li>
-</ul>
-<div id="contentContainer"></div>
-<!-- Modal -->
-<div class="modal fade" id="videoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h1 class="modal-title"></h1>
-      </div>
-      <div class="modal-body">        
-        <!-- 16:9 aspect ratio -->
-        <div class="embed-responsive embed-responsive-16by9">
-          <iframe class="embed-responsive-item" src="" id="videoIframe"  allowscriptaccess="always">></iframe>
+  <div id="folderNav" data-content-field="navigation-folderNav">
+    <div class="folder-nav-toggle"></div>
+    <nav class="folder-nav" role="navigation"></nav>
+  </div>
+
+  <div id="content" class="main-content" data-content-field="main-content" data-edit-main-image="Banner">
+    <ul id="workoutTabs" class="nav nav-tabs">
+      <li id="currentWorkoutTab" class="nav-item">
+        <a class="nav-link" href="#">This Week</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Off-Season<span class="caret"></span></a>
+        <div class="dropdown-menu" id="offseasonMenu"></div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Pre-Season<span class="caret"></span></a>
+        <div class="dropdown-menu" id="preseasonMenu"></div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">In-Season<span class="caret"></span></a>
+        <div class="dropdown-menu" id="inseasonMenu"></div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Post-Season<span class="caret"></span></a>
+        <div class="dropdown-menu" id="postseasonMenu"></div>
+      </li>
+    </ul>
+    <div id="contentContainer"></div>
+    <!-- Modal -->
+    <div class="modal fade" id="videoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h1 class="modal-title"></h1>
+          </div>
+          <div class="modal-body">        
+            <!-- 16:9 aspect ratio -->
+            <div class="embed-responsive embed-responsive-16by9">
+              <iframe class="embed-responsive-item" src="" id="videoIframe"  allowscriptaccess="always">></iframe>
+            </div>
+          </div>
+          <div class="modal-footer"></div>
         </div>
       </div>
-      <div class="modal-footer"></div>
-    </div>
-  </div>
-</div> 
+    </div> 
 
-<squarespace:script src="main.js" combo="false" />
+  </div>
+
+</main>
+
+<script type="text/javascript" src="./scripts/main.js"></script>

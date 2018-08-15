@@ -1,0 +1,26 @@
+{
+  "items": [
+    {
+      "customContent": {
+        "customType": "planInfo",
+        "clientFullName": "Turbine",
+        "planId": "turbine",
+        "gender": "Men",
+        "level": "Club",
+        "currentSeason": "In",
+        "currentWeekNumber": "5"
+      }
+    },
+    {
+      "customContent": {
+        "customType": "planInfo",
+        "clientFullName": "NC Hammer",
+        "planId": "nchammer",
+        "gender": "Men",
+        "level": "Youth",
+        "currentSeason": "In",
+        "currentWeekNumber": "10"
+      }
+    }
+  ]
+}

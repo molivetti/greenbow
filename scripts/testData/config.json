@@ -1,0 +1,28 @@
+{
+  "collection": {
+    "urlId": "turbine",
+    "title": "Turbine",
+    "collections": [
+      {
+        "fullUrl": "/turbine/plan-schedule/",
+        "navigationTitle": "Plan Schedule"
+      },
+      {
+        "fullUrl": "/turbine/workout-levels/",
+        "navigationTitle": "Workout Levels"
+      },
+      {
+        "fullUrl": "/turbine/general-instructions/",
+        "navigationTitle": "General Instructions"
+      },
+      {
+        "fullUrl": "/turbine/nutrition-recommendations/",
+        "navigationTitle": "Nutrition Recommendations"
+      },
+      {
+        "fullUrl": "/turbine/smoothie-recipes/",
+        "navigationTitle": "Smoothie Recipes"
+      }
+    ]
+  }
+}
