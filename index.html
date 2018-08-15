@@ -1,1 +1,21 @@
-<div>HEY</div>
+<!doctype html>
+<html>
+	<head>
+		<link type="text/css" rel="stylesheet" href="styles/bootstrap.css">
+		<link type="text/css" rel="stylesheet" href="styles/bootstrap-theme.css">
+
+		<script type="text/javascript" src="jquery-3.3.1.min.js"></script>
+		<script type="text/javascript" src="bootstrap.js"></script>
+	</head>
+	
+	<body>
+
+		<div id="siteWrapper"></div>
+
+		<script type="text/javascript">
+			$(document).ready(function(e) {
+				$('#siteWrapper').load('collections/plan.list');
+			});
+		</script>
+	</body>
+</html>
