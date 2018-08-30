@@ -1,6 +1,6 @@
-Greenbow: Squarespace Plugin
+Greenbow 
 ---
-*By Matthew Olivetti*
+*A Squarespace plugin by Matthew Olivetti*
 
 Squarespace knowledge commerce plugin for customizing and managing health programs accessed by subscription members through Squarespace.
 
