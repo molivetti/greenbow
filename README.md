@@ -1,7 +1,4 @@
-# greenbow
-Expansive knowledge commerce platform for use with Squarespace. Project uses JavaScript, jQuery, Bootstrap and built-in Squarespace functionality with an intuitive interface design for users with limited web building skills.
-
-Greenbow
+Greenbow: Squarespace Plugin
 ---
 *By Matthew Olivetti*
 
