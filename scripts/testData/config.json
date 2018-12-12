@@ -4,23 +4,23 @@
     "title": "Turbine",
     "collections": [
       {
-        "fullUrl": "/turbine/plan-schedule/",
+        "fullUrl": "plan-schedule",
         "navigationTitle": "Plan Schedule"
       },
       {
-        "fullUrl": "/turbine/workout-levels/",
+        "fullUrl": "workout-levels",
         "navigationTitle": "Workout Levels"
       },
       {
-        "fullUrl": "/turbine/general-instructions/",
+        "fullUrl": "general-instructions",
         "navigationTitle": "General Instructions"
       },
       {
-        "fullUrl": "/turbine/nutrition-recommendations/",
+        "fullUrl": "nutrition-recommendations",
         "navigationTitle": "Nutrition Recommendations"
       },
       {
-        "fullUrl": "/turbine/smoothie-recipes/",
+        "fullUrl": "smoothie-recipes",
         "navigationTitle": "Smoothie Recipes"
       }
     ]

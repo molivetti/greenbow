@@ -26,7 +26,7 @@ function populateFolderNav( folder ){
   var teamLogo = $("<img>").attr("id", "teamLogo");
   var imgSrc = "/s/" + folder.urlId + "Logo.jpg";
   if ( isDevEnvironment() ){
-    imgSrc = folder.urlId + "Logo.jpg";
+    imgSrc = "/images/" + folder.urlId + "Logo.jpg";
   }
   teamLogo.attr("src", imgSrc);
   nav.append(teamLogo);
@@ -127,17 +127,21 @@ function addSideNavListeners(){
 
       //Create URL query string to prevent cache load
       var randomNumber = (new Date()).getTime(); 
-      $.ajax({
-        url: $(this).data("href")+"?q="+randomNumber, 
-        data: {format:"json"}, 
-        dataType: "json", 
-        method: "GET"
-      })
-      .done(
-        function(data){
-          displayContent(data.collection.navigationTitle, data.mainContent);
-        }
-      );
+      if ( isDevEnvironment() ){
+        return $.getJSON("scripts/testData/workouts.json");
+      } else {
+        $.ajax({
+          url: $(this).data("href")+"?q="+randomNumber, 
+          data: {format:"json"}, 
+          dataType: "json", 
+          method: "GET"
+        })
+        .done(
+          function(data){
+            displayContent(data.collection.navigationTitle, data.mainContent);
+          }
+        );
+      }
 
     });
   });
@@ -244,6 +248,10 @@ function isDevEnvironment(){
   } else {
     return false;
   }
+}
+
+function loadPlaceholderImages(){
+  
 }
 
 function getPlans(){
