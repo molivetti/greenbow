@@ -26,7 +26,7 @@ function populateFolderNav( folder ){
   var teamLogo = $("<img>").attr("id", "teamLogo");
   var imgSrc = "/s/" + folder.urlId + "Logo.jpg";
   if ( isDevEnvironment() ){
-    imgSrc = "/images/" + folder.urlId + "Logo.jpg";
+    imgSrc = "images/" + folder.urlId + "Logo.jpg";
   }
   teamLogo.attr("src", imgSrc);
   nav.append(teamLogo);
